@@ -19,50 +19,73 @@
         };
         return {
             getAllusers: getAllusers,
-            getAllOrders: getAllOrders
+            getAllOrders: getAllOrders,
+            getOrdersStatus: getOrdersStatus
         };
 
         function getAllusers(queryParams){
-            // GlobalLoader.show();
+            // globalLoader.show();
             //get all orders
             var deffered = $q.defer();
             var dataToAttachOnUrl = queryParams || DefaultQueryParams;
             restFactory.users.getAllusers(dataToAttachOnUrl).then(function(resp){
                 if(resp.success){
-                    // GlobalLoader.hide();
+                    // globalLoader.hide();
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
-                    // GlobalLoader.hide();
+                    // globalLoader.hide();
                     // alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){
-                // GlobalLoader.hide();
+                // globalLoader.hide();
                 deffered.reject(err);
             });
             return deffered.promise;
         }
 
         function getAllOrders(queryParams){
-            // GlobalLoader.show();
+            // globalLoader.show();
             //get all orders
             var deffered = $q.defer();
             var dataToAttachOnUrl = queryParams || DefaultQueryParams;
             restFactory.users.getAllOrders(dataToAttachOnUrl).then(function(resp){
                 if(resp.success){
-                    // GlobalLoader.hide();
+                    // globalLoader.hide();
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
-                    // GlobalLoader.hide();
+                    // globalLoader.hide();
                     // alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){
-                // GlobalLoader.hide();
+                // globalLoader.hide();
+                deffered.reject(err);
+            });
+            return deffered.promise;
+        }
+        function getOrdersStatus(){
+            // globalLoader.show();
+            //get all orders
+            var deffered = $q.defer();
+
+            restFactory.users.getOrdersStatus().then(function(resp){
+                if(resp.success){
+                    // globalLoader.hide();
+                    // alertFactory.success(null, resp.message);
+                    deffered.resolve(resp.data);
+                }
+                else{
+                    // globalLoader.hide();
+                    // alertFactory.error(null, resp.message);
+                    deffered.reject(resp);
+                }
+            }, function(err){
+                // globalLoader.hide();
                 deffered.reject(err);
             });
             return deffered.promise;

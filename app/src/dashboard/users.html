@@ -5,7 +5,14 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <div class="row">
-                    users
+                    <div ng-repeat="user in vm.users">
+                        <div>{{user.first_name}}</div>
+                        <div>{{user.last_name}}</div>
+                        <div>{{user.country}}</div>
+                        <div>{{user.joined_date}}</div>
+                        <div>{{user.first_name}}</div>
+                        <div>{{user.status}}</div>
+                    </div>
                 </div>
             </div>
         </div>

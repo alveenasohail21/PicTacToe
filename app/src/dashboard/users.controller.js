@@ -10,14 +10,16 @@
 
     angular
         .module('app.dashboard')
-        .controller('DashboardCtrl', DashboardCtrl);
+        .controller('UsersCtrl', UsersCtrl);
 
     /* @ngInject */
-    function DashboardCtrl(dashboardFactory){
+    function UsersCtrl(dashboardFactory, r_users){
         var vm = this;
-        dashboardFactory.getOrdersStatus().then(function (response) {
-            console.log(response);
-        });
+        vm.userCount=r_users.totalcount;
+        vm.users=r_users.users;
+
+        console.log(vm.userCount);
+        console.log(vm.users);
     }
 
 }());

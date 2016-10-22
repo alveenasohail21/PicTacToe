@@ -30,25 +30,34 @@
             .state('Dashboard.Users', {
                     url:'/users',
                     resolve: {
-                        // r_users: function (dashboardFactory) {
-                        //     return dashboardFactory.getAllusers();
-                        // }
+                        r_users: function (dashboardFactory) {
+                            return dashboardFactory.getAllusers();
+                        }
                     },
 
                     views: {
                         '@':{
                             templateUrl:'src/dashboard/users.html',
-                            controller: 'DashboardCtrl as vm'
+                            controller: 'UsersCtrl as vm'
                         }
                     }
                 }
             )
             .state('Dashboard.Orders', {
                     url:'/orders',
+                    resolve: {
+                        r_orders: function (dashboardFactory) {
+                            return dashboardFactory.getAllOrders();
+                        },
+                        r_orders_status: function (dashboardFactory) {
+                            return dashboardFactory.getOrdersStatus();
+                        }
+
+                    },
                     views: {
                         '@':{
                             templateUrl:'src/dashboard/orders.html',
-                            controller: 'DashboardCtrl as vm'
+                            controller: 'OrdersCtrl as vm'
                         }
                     }
                 }
