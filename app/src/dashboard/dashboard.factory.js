@@ -20,6 +20,7 @@
         return {
             getAllusers: getAllusers,
             getAllOrders: getAllOrders,
+            getOrderDetails: getOrderDetails,
             getOrdersStatus: getOrdersStatus
         };
 
@@ -74,6 +75,27 @@
             var deffered = $q.defer();
 
             restFactory.users.getOrdersStatus().then(function(resp){
+                if(resp.success){
+                    // globalLoader.hide();
+                    // alertFactory.success(null, resp.message);
+                    deffered.resolve(resp.data);
+                }
+                else{
+                    // globalLoader.hide();
+                    // alertFactory.error(null, resp.message);
+                    deffered.reject(resp);
+                }
+            }, function(err){
+                // globalLoader.hide();
+                deffered.reject(err);
+            });
+            return deffered.promise;
+        }
+        function getOrderDetails(id){
+            // globalLoader.show();
+            //get all orders
+            var deffered = $q.defer();
+            restFactory.users.getOrderDetails(id).then(function(resp){
                 if(resp.success){
                     // globalLoader.hide();
                     // alertFactory.success(null, resp.message);

@@ -33,7 +33,8 @@
       users:{
         getAllusers: getAllusers,
         getAllOrders: getAllOrders,
-        getOrdersStatus: getOrdersStatus
+        getOrdersStatus: getOrdersStatus,
+        getOrderDetails: getOrderDetails
       },
       oneUrl: oneUrl
     };
@@ -53,6 +54,9 @@
     }
     function getOrdersStatus(){
       return Admin.one('orders').one('status').get();
+    }
+    function getOrderDetails(id){
+      return Admin.one('orders').one(id).get();
     }
   }
 }());
