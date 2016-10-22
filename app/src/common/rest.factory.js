@@ -23,11 +23,15 @@
     var Products = Restangular.all('products');
     var Album= Restangular.all('albums');
     var Project= Restangular.all('projects');
+    var Admin= Restangular.all('admin');
 
     /* Return Functions */
     return {
       admin:{
 
+      },
+      users:{
+        getAllusers: getAllusers
       },
       oneUrl: oneUrl
     };
@@ -38,6 +42,9 @@
       return Restangular.oneUrl('dummy', url).get({}, {
         'Content-Type': 'application/x-www-form-urlencoded'
       });
+    }
+    function getAllusers(queryParams){
+      return Admin.one('users').get(queryParams);
     }
   }
 }());
