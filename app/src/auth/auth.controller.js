@@ -27,10 +27,11 @@
       //
     }
     function login(user){
+      globalLoader.show();
       authFactory.login(user);
     }
     function logout(){
-      console.log("logout");
+      globalLoader.show();
       authFactory.logout();
     }
   }

@@ -26,111 +26,111 @@
         };
 
         function getAllusers(queryParams){
-            // globalLoader.show();
+            globalLoader.show();
             //get all orders
             var deffered = $q.defer();
             var dataToAttachOnUrl = queryParams || DefaultQueryParams;
             restFactory.users.getAllusers(dataToAttachOnUrl).then(function(resp){
                 if(resp.success){
-                    // globalLoader.hide();
+                    globalLoader.hide();
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
-                    // globalLoader.hide();
+                    globalLoader.hide();
                     // alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){
-                // globalLoader.hide();
+                globalLoader.hide();
                 deffered.reject(err);
             });
             return deffered.promise;
         }
 
         function getAllOrders(queryParams){
-            // globalLoader.show();
+            globalLoader.show();
             //get all orders
             var deffered = $q.defer();
             var dataToAttachOnUrl = queryParams || DefaultQueryParams;
             restFactory.orders.getAllOrders(dataToAttachOnUrl).then(function(resp){
                 if(resp.success){
-                    // globalLoader.hide();
+                    globalLoader.hide();
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
-                    // globalLoader.hide();
+                    globalLoader.hide();
                     // alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){
-                // globalLoader.hide();
+                globalLoader.hide();
                 deffered.reject(err);
             });
             return deffered.promise;
         }
         function getOrdersStatus(){
-            // globalLoader.show();
+            globalLoader.show();
             //get all orders
             var deffered = $q.defer();
 
             restFactory.orders.getOrdersStatus().then(function(resp){
                 if(resp.success){
-                    // globalLoader.hide();
+                    globalLoader.hide();
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
-                    // globalLoader.hide();
+                    globalLoader.hide();
                     // alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){
-                // globalLoader.hide();
+                globalLoader.hide();
                 deffered.reject(err);
             });
             return deffered.promise;
         }
         function getOrderDetails(id){
-            // globalLoader.show();
+            globalLoader.show();
             //get all orders
             var deffered = $q.defer();
             restFactory.orders.getOrderDetails(id).then(function(resp){
                 if(resp.success){
-                    // globalLoader.hide();
+                    globalLoader.hide();
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
-                    // globalLoader.hide();
+                    globalLoader.hide();
                     // alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){
-                // globalLoader.hide();
+                globalLoader.hide();
                 deffered.reject(err);
             });
             return deffered.promise;
         }
         function searchUser(queryParams, value){
-            // globalLoader.show();
+            globalLoader.show();
             //get all orders
             var deffered = $q.defer();
             var dataToAttachOnUrl = queryParams || DefaultQueryParams;
             restFactory.users.searchUser(dataToAttachOnUrl, value).then(function(resp){
                 if(resp.success){
-                    // globalLoader.hide();
+                    globalLoader.hide();
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
-                    // globalLoader.hide();
+                    globalLoader.hide();
                     // alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){
-                // globalLoader.hide();
+                globalLoader.hide();
                 deffered.reject(err);
             });
             return deffered.promise;

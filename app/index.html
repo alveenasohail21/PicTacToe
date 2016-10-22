@@ -25,6 +25,13 @@
 <!--<ng-include src="'src/layouts/userHeader.html'"></ng-include>-->
  <!-- Page Content -->
 
+ <!-- Global Loader -->
+ <div class="global-loader" style="z-index: 99999999; display: none;">
+     <img src="svg/ptt-loader.svg" alt="Loading...">
+ </div>
+
+
+
 
  <div ui-view></div>
 
@@ -33,6 +40,10 @@
 
 <!-- Modals-->
 
+ <div class="alert alert-dismissible" ng-class="$root.alert.class" role="alert" ng-if="$root.alert.show">
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+     <strong>{{$root.alert.title}}</strong> {{$root.alert.message}}
+ </div>
 
 </body>
 
@@ -52,6 +63,9 @@
 
 <!-- build:js scripts/libs2.js -->
 <script src="scripts/eventChannel.js"></script>
+<script src="scripts/imageLazyLoad.js"></script>
+<script src="scripts/dataTable.js"></script>
+<script src="scripts/loader.js"></script>
 <!-- endbuild -->
 
 <!-- build:js scripts/app.js -->
@@ -63,6 +77,14 @@
 <script src="src/app.module.js"></script>
 <script src="src/auth/auth.module.js"></script>
 <script src="src/dashboard/dashboard.module.js"></script>
+<!-- Factories -->
+<script src="src/common/alert.factory.js"></script>
+<script src="src/common/user.factory.js"></script>
+<script src="src/common/rest.factory.js"></script>
+<script src="src/auth/auth.factory.js"></script>
+<script src="src/dashboard/dashboard.factory.js"></script>
+
+<!-- Directives -->
 <!-- Configs, Runs, Constants -->
 <script src="src/core/restangular.config.js"></script>
 <script src="src/core/router.config.js"></script>
@@ -73,14 +95,6 @@
 <script src="src/common/assets/assets.run.js"></script>
 <script src="src/common/events/angularEvents.run.js"></script>
 <script src="src/common/events/customEvents.run.js"></script>
-<!-- Factories -->
-<script src="src/common/alert.factory.js"></script>
-<script src="src/common/user.factory.js"></script>
-<script src="src/common/rest.factory.js"></script>
-<script src="src/auth/auth.factory.js"></script>
-<script src="src/dashboard/dashboard.factory.js"></script>
-
-<!-- Directives -->
 
 <!-- Controllers -->
 <script src="src/layouts/layouts.controller.js"></script>

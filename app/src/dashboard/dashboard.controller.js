@@ -15,9 +15,9 @@
     /* @ngInject */
     function DashboardCtrl(dashboardFactory){
         var vm = this;
-        dashboardFactory.getOrderDetails('1').then(function (response) {
-            console.log(response);
-        });
+        // dashboardFactory.getOrderDetails('1').then(function (response) {
+        //     console.log(response);
+        // });
     }
 
 }());
