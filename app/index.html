@@ -15,26 +15,23 @@
 
 <body class="">
 
-<!-- Main Header -->
+ <!--Main Header-->
 <ng-include src="'src/layouts/mainHeader.html'"></ng-include>
 
-<!-- Sub Header -->
-<ng-include src="'src/layouts/subHeader.html'"></ng-include>
+<!--&lt;!&ndash; Sub Header &ndash;&gt;-->
+<!--<ng-include src="'src/layouts/subHeader.html'"></ng-include>-->
 
-<!-- User Header -->
-<ng-include src="'src/layouts/userHeader.html'"></ng-include>
+<!--&lt;!&ndash; User Header &ndash;&gt;-->
+<!--<ng-include src="'src/layouts/userHeader.html'"></ng-include>-->
 
 <!-- Page Content -->
 <div ui-view></div>
 
 <!-- Footer -->
-<ng-include src="'src/layouts/footer.html'"></ng-include>
+<!--<ng-include src="'src/layouts/footer.html'"></ng-include>-->
 
-<!-- Modals - Login -->
-<ng-include src="'src/layouts/modals/login.html'"></ng-include>
+<!-- Modals-->
 
-<!-- Modals - Signup -->
-<ng-include src="'src/layouts/modals/signup.html'"></ng-include>
 
 </body>
 
@@ -63,11 +60,15 @@
 <script src="src/layouts/layouts.module.js"></script>
 <script src="src/components/components.module.js"></script>
 <script src="src/app.module.js"></script>
+<script src="src/auth/auth.module.js"></script>
+<script src="src/dashboard/dashboard.module.js"></script>
 <!-- Configs, Runs, Constants -->
 <script src="src/core/restangular.config.js"></script>
 <script src="src/core/router.config.js"></script>
 <script src="src/core/httpStatus.constant.js"></script>
 <script src="src/core/core.contants.js"></script>
+<script src="src/core/localStorage.config.js"></script>
+<script src="src/core/satellizer.config.js"></script>
 <script src="src/common/assets/assets.run.js"></script>
 <script src="src/common/events/angularEvents.run.js"></script>
 <script src="src/common/events/customEvents.run.js"></script>
@@ -75,11 +76,15 @@
 <script src="src/common/alert.factory.js"></script>
 <script src="src/common/user.factory.js"></script>
 <script src="src/common/rest.factory.js"></script>
+<script src="src/auth/auth.factory.js"></script>
+<script src="src/dashboard/dashboard.factory.js"></script>
 
 <!-- Directives -->
 
 <!-- Controllers -->
 <script src="src/layouts/layouts.controller.js"></script>
+<script src="src/auth/auth.controller.js"></script>
+<script src="src/dashboard/dashboard.controller.js"></script>
 <!-- endbuild -->
 
 </html>

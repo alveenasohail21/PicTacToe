@@ -1,13 +1,14 @@
 /* Main Header */
 .main-header{
   height: 80px;
+  background-color: white;
   .navbar{
     margin-bottom: 0;
     height:100%;
+    //background-color: transparent;
+    border: none;
     .container-fluid {
       padding: 0;
-      margin-left: 13.7vw;
-      margin-right: 14vw;
       position: relative;
       .navbar-collapse{
         padding: 0;
@@ -18,10 +19,15 @@
             display: initial;
             margin-left: 3px;
             margin-right: 4px;
-            i{
-              font-size: 19px;
-              margin-top: 35px;
-              color: #9b9b9b;
+            a{
+              i{
+                font-size: 19px;
+                margin-top: 35px;
+                color: #9b9b9b;
+              }
+            }
+            a:hover{
+              text-decoration: none;
             }
           }
         }
@@ -61,6 +67,16 @@
               width: 32px;
 
             }
+
+            &.text{
+              margin-top: 32px;
+              color: #333;
+              font-family: Font_Open_Sans_Regular;
+              a{
+                cursor: pointer;
+              }
+            }
+
             &.user-pic{
               border-style: solid;
               border-width: 1px;
@@ -70,6 +86,25 @@
               margin-top: 25px;
               img{
                 height: 32px;
+                cursor: pointer;
+              }
+              &.dropdown{
+                .dropdown-menu{
+                  border-radius: 4px;
+                  li{
+                    display: block;
+                    height: 40px;
+                    font-family: Font_Open_Sans_Regular;
+                    line-height: 2.8;
+                    text-align: center;
+                    margin: 0 8px;
+                    cursor: pointer;
+                    transition: all ease 0.8s;
+                    &:hover{
+                      background-color: #f3f6f8;
+                    }
+                  }
+                }
               }
             }
 

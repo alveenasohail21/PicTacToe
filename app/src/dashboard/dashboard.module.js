@@ -9,7 +9,7 @@
     'use strict';
 
     angular
-        .module('app.layouts', [])
+        .module('app.dashboard', [])
         .config(configuration);
 
     /* @ngInject */
@@ -17,12 +17,12 @@
 
         //add your state mappings here
         $stateProvider
-            .state('Landing', {
+            .state('Dashboard', {
                     url:'/',
                     views: {
                         '@':{
-                            templateUrl:'src/layouts/home.html',
-                            controller: 'authCtrl as vm'
+                            templateUrl:'src/dashboard/dashboard.html',
+                            controller: 'DashboardCtrl as vm'
                         }
                     }
                 }
