@@ -31,7 +31,8 @@
 
       },
       users:{
-        getAllusers: getAllusers
+        getAllusers: getAllusers,
+        getAllOrders: getAllOrders
       },
       oneUrl: oneUrl
     };
@@ -45,6 +46,9 @@
     }
     function getAllusers(queryParams){
       return Admin.one('users').get(queryParams);
+    }
+    function getAllOrders(queryParams){
+      return Admin.one('orders').get(queryParams);
     }
   }
 }());

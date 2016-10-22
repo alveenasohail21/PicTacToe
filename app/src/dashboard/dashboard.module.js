@@ -30,9 +30,9 @@
             .state('Dashboard.Users', {
                     url:'/users',
                     resolve: {
-                        r_users: function (dashboardFactory) {
-                            return dashboardFactory.getAllusers();
-                        }
+                        // r_users: function (dashboardFactory) {
+                        //     return dashboardFactory.getAllusers();
+                        // }
                     },
 
                     views: {

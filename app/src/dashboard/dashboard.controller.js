@@ -18,7 +18,10 @@
         // vm.users=r_users;
         dashboardFactory.getAllusers().then(function (response) {
             console.log(response);
-        })
+        });
+        dashboardFactory.getAllOrders().then(function (response) {
+            console.log(response);
+        });
     }
 
 }());

@@ -18,7 +18,8 @@
             size: 10
         };
         return {
-            getAllusers: getAllusers
+            getAllusers: getAllusers,
+            getAllOrders: getAllOrders
         };
 
         function getAllusers(queryParams){
@@ -27,6 +28,29 @@
             var deffered = $q.defer();
             var dataToAttachOnUrl = queryParams || DefaultQueryParams;
             restFactory.users.getAllusers(dataToAttachOnUrl).then(function(resp){
+                if(resp.success){
+                    // GlobalLoader.hide();
+                    // alertFactory.success(null, resp.message);
+                    deffered.resolve(resp.data);
+                }
+                else{
+                    // GlobalLoader.hide();
+                    // alertFactory.error(null, resp.message);
+                    deffered.reject(resp);
+                }
+            }, function(err){
+                // GlobalLoader.hide();
+                deffered.reject(err);
+            });
+            return deffered.promise;
+        }
+
+        function getAllOrders(queryParams){
+            // GlobalLoader.show();
+            //get all orders
+            var deffered = $q.defer();
+            var dataToAttachOnUrl = queryParams || DefaultQueryParams;
+            restFactory.users.getAllOrders(dataToAttachOnUrl).then(function(resp){
                 if(resp.success){
                     // GlobalLoader.hide();
                     // alertFactory.success(null, resp.message);
