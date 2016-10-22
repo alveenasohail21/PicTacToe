@@ -32,6 +32,9 @@
       },
       users:{
         getAllusers: getAllusers,
+        searchUser: searchUser
+      },
+      orders:{
         getAllOrders: getAllOrders,
         getOrdersStatus: getOrdersStatus,
         getOrderDetails: getOrderDetails
@@ -55,8 +58,8 @@
     function getOrdersStatus(){
       return Admin.one('orders').one('status').get();
     }
-    function getOrderDetails(id){
-      return Admin.one('orders').one(id).get();
+    function searchUser(queryParams, value){
+      return Admin.one('users').one('search').post(null, queryParams);
     }
   }
 }());

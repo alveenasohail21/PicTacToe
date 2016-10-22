@@ -21,7 +21,8 @@
             getAllusers: getAllusers,
             getAllOrders: getAllOrders,
             getOrderDetails: getOrderDetails,
-            getOrdersStatus: getOrdersStatus
+            getOrdersStatus: getOrdersStatus,
+            searchUser: searchUser
         };
 
         function getAllusers(queryParams){
@@ -52,7 +53,7 @@
             //get all orders
             var deffered = $q.defer();
             var dataToAttachOnUrl = queryParams || DefaultQueryParams;
-            restFactory.users.getAllOrders(dataToAttachOnUrl).then(function(resp){
+            restFactory.orders.getAllOrders(dataToAttachOnUrl).then(function(resp){
                 if(resp.success){
                     // globalLoader.hide();
                     // alertFactory.success(null, resp.message);
@@ -74,7 +75,7 @@
             //get all orders
             var deffered = $q.defer();
 
-            restFactory.users.getOrdersStatus().then(function(resp){
+            restFactory.orders.getOrdersStatus().then(function(resp){
                 if(resp.success){
                     // globalLoader.hide();
                     // alertFactory.success(null, resp.message);
@@ -95,7 +96,29 @@
             // globalLoader.show();
             //get all orders
             var deffered = $q.defer();
-            restFactory.users.getOrderDetails(id).then(function(resp){
+            restFactory.orders.getOrderDetails(id).then(function(resp){
+                if(resp.success){
+                    // globalLoader.hide();
+                    // alertFactory.success(null, resp.message);
+                    deffered.resolve(resp.data);
+                }
+                else{
+                    // globalLoader.hide();
+                    // alertFactory.error(null, resp.message);
+                    deffered.reject(resp);
+                }
+            }, function(err){
+                // globalLoader.hide();
+                deffered.reject(err);
+            });
+            return deffered.promise;
+        }
+        function searchUser(queryParams, value){
+            // globalLoader.show();
+            //get all orders
+            var deffered = $q.defer();
+            var dataToAttachOnUrl = queryParams || DefaultQueryParams;
+            restFactory.users.searchUser(dataToAttachOnUrl, value).then(function(resp){
                 if(resp.success){
                     // globalLoader.hide();
                     // alertFactory.success(null, resp.message);
