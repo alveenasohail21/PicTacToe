@@ -73,6 +73,8 @@
 <!-- endbuild -->
 
 <!-- build:js scripts/app.js -->
+
+
 <!-- Modules -->
 <script src="src/core/core.module.js"></script>
 <script src="src/common/common.module.js"></script>
@@ -81,14 +83,9 @@
 <script src="src/app.module.js"></script>
 <script src="src/auth/auth.module.js"></script>
 <script src="src/dashboard/dashboard.module.js"></script>
-<!-- Factories -->
-<script src="src/common/alert.factory.js"></script>
-<script src="src/common/user.factory.js"></script>
-<script src="src/common/rest.factory.js"></script>
-<script src="src/auth/auth.factory.js"></script>
-<script src="src/dashboard/dashboard.factory.js"></script>
 
-<!-- Directives -->
+
+
 <!-- Configs, Runs, Constants -->
 <script src="src/core/restangular.config.js"></script>
 <script src="src/core/router.config.js"></script>
@@ -100,12 +97,29 @@
 <script src="src/common/events/angularEvents.run.js"></script>
 <script src="src/common/events/customEvents.run.js"></script>
 
+<!-- Factories -->
+<script src="src/common/alert.factory.js"></script>
+<script src="src/common/user.factory.js"></script>
+<script src="src/common/rest.factory.js"></script>
+<script src="src/common/Chartist.factory.js"></script>
+<script src="src/auth/auth.factory.js"></script>
+<script src="src/dashboard/dashboard.factory.js"></script>
+
+
 <!-- Controllers -->
 <script src="src/layouts/layouts.controller.js"></script>
 <script src="src/auth/auth.controller.js"></script>
 <script src="src/dashboard/dashboard.controller.js"></script>
 <script src="src/dashboard/users.controller.js"></script>
 <script src="src/dashboard/order.controller.js"></script>
+
+<!-- Directives -->
+<script src="src/components/chartist/chartist.directive.js"></script>
+
 <!-- endbuild -->
+
+<link rel="stylesheet" href="bower_components/chartist/dist/chartist.css">
+<script src="bower_components/chartist/dist/chartist.js"></script>
+
 
 </html>

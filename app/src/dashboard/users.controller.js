@@ -17,9 +17,8 @@
         var vm = this;
         vm.userCount=r_users.totalcount;
         vm.users=r_users.users;
-        console.log(vm.users[0]);
         function init() {
-            
+
         }
         init();
     }

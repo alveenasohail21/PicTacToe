@@ -10,6 +10,7 @@
 
   angular.module('app', [
     'app.core',
+    'app.components',
     'app.common',
   /**
     * Application modules
