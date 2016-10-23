@@ -2,11 +2,71 @@
     <div id="wrapper">
         <ng-include ng-if="user" src="'src/layouts/sidebar.html'"></ng-include>
         <!-- /#page-content-wrapper -->
+
+
+
         <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <div class="row">
-                    orders
+            <div class="container-fluid orders">
+                <div class="order-status text-center">
+                    <h2>Order Status</h2>
+                    <div class="row">
+                        <div class="col col-sm-2">
+                            <h4>Total Orders </h4>
+                            <h1>{{vm.ordersStatus.totalOrders}}</h1>
+                        </div>
+                        <div class="col col-sm-2">
+                            <h4>Total In Process </h4>
+                            <h1>{{vm.ordersStatus.totalInProcess}}</h1>
+                        </div>
+                        <div class="col col-sm-2">
+                            <h4>Total Pending </h4>
+                            <h1>{{vm.ordersStatus.totalPending}}</h1>
+                        </div>
+                        <div class="col col-sm-2">
+                            <h4>Total Shipped </h4>
+                            <h1>{{vm.ordersStatus.totalShipped}}</>
+                        </div>
+                        <div class="col col-sm-2">
+                            <h4>Total Canceled </h4>
+                            <h1>{{vm.ordersStatus.totalCanceled}}</h1>
+                        </div>
+                    </div>
                 </div>
+
+
+                <div class="orders-list">
+                    <h2 class="text-center">
+                        Orders
+                    </h2>
+                    <table id="orders-list" class="display responsive nowrap table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Billing Id</th>
+                            <th>Shipping Id</th>
+                            <th>Delivery Date From</th>
+                            <th>Delivery Date To</th>
+                            <th>Grand Total</th>
+                            <th>Order Date</th>
+                            <th>status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="order in vm.orders">
+                            <td>{{order.action}}</td>
+                            <td>{{order.billing_id}}</td>
+                            <td>{{order.shipping_id}}</td>
+                            <td>{{order.delivery_date_from}}</td>
+                            <td>{{order.grand_total}}</td>
+                            <td>{{order.order_date}}</td>
+                            <td>{{order.status}}</td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
             </div>
         </div>
     </div>

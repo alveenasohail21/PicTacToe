@@ -4,16 +4,42 @@
         <!-- /#page-content-wrapper -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                <div class="row">
-                    <div ng-repeat="user in vm.users">
-                        <div>{{user.first_name}}</div>
-                        <div>{{user.last_name}}</div>
-                        <div>{{user.country}}</div>
-                        <div>{{user.joined_date}}</div>
-                        <div>{{user.first_name}}</div>
-                        <div>{{user.status}}</div>
-                    </div>
+                <div class="users-list">
+                    <h4 class="text-center">
+                        Users
+                    </h4>
+                    <table id="users-list" class="display responsive nowrap table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Country</th>
+                            <th>Full Address</th>
+                            <th>Mobile Number</th>
+                            <th>Phone Number</th>
+                            <th>Status</th>
+                            <th>Email</th>
+                            <th>Joined Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="user in vm.users">
+                            <td>{{user.first_name}}</td>
+                            <td>{{user.last_name}}</td>
+                            <td>{{user.country}}</td>
+                            <td>{{user.full_address}}</td>
+                            <td>{{user.mobile_number}}</td>
+                            <td>{{user.phone_number}}</td>
+                            <td>{{user.status}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.joined_date}}</td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+
                 </div>
+
             </div>
         </div>
     </div>

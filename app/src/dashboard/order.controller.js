@@ -17,6 +17,9 @@
         var vm = this;
         vm.orderCount=r_orders.totalcount;
         vm.orders=r_orders.users;
+        vm.ordersStatus=r_orders_status;
+        console.log(vm.orders);
+        console.log(vm.ordersStatus);
         vm.getOrderDetails=getOrderDetails;
 
         function getOrderDetails(id) {
