@@ -27,6 +27,16 @@
                     }
                 }
             )
+            .state('Dashboard.Analytics', {
+                    url:'/analytics',
+                    views: {
+                        '@':{
+                            templateUrl:'src/dashboard/analytics.html',
+                            controller: 'AnalyticsCtrl as vm'
+                        }
+                    }
+                }
+            )
             .state('Dashboard.Users', {
                     url:'/users',
                     resolve: {

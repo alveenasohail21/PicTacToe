@@ -35,7 +35,12 @@
         getOrdersStatus: getOrdersStatus,
         getOrderDetails: getOrderDetails,
         orderSearch: orderSearch,
-        orderSearchByTime: orderSearchByTime
+        orderSearchByTime: orderSearchByTime,
+        updateOrder:updateOrder
+      },
+      earning: {
+        annualEarning: annualEarning,
+        earningByCity: earningByCity
       },
       oneUrl: oneUrl
     };
@@ -70,6 +75,9 @@
     function updateUser(id, value){
       return Admin.one('users').one(id).customPUT({status: value});
     }
+    function updateOrder(id, value){
+      return Admin.one('orders').one(id).customPUT({status: value});
+    }
 
     function userSearchByTime(queryParams){
       return Admin.one('users').one('searchbytime').post(null, queryParams);
@@ -86,5 +94,15 @@
     function adminToday(){
       return Admin.one('today').get();
     }
+    /////////////////////////////////////////////////////////
+    function annualEarning(){
+      return Admin.one('earning').one('annualearning').get();
+    }
+    function earningByCity(){
+      return Admin.one('earning').one('bycity').get();
+    }
+    // function media(){
+    //   return Admin.one('earning').one('bycity').get();
+    // }
   }
 }());

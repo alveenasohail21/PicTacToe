@@ -30,7 +30,8 @@
             getOrderDetails: getOrderDetails,
             getOrdersStatus: getOrdersStatus,
             orderSearchByTime: orderSearchByTime,
-            orderSearch: orderSearch
+            orderSearch: orderSearch,
+            updateOrder: updateOrder
         };
         /* Define Fuctions */
 
@@ -104,7 +105,7 @@
             return deffered.promise;
         }
 
-        function orderSearch(skip, limit, value){
+        function orderSearch(value, skip, limit){
             globalLoader.show();
             var queryParams={
                 skip: skip || DefaultSearchParams.skip,
@@ -154,6 +155,29 @@
             });
             return deffered.promise;
         }
+
+        function updateOrder(id, value){
+            globalLoader.show();
+            //get all orders
+            var deffered = $q.defer();
+            restFactory.orders.updateOrder(id, value).then(function(resp){
+                if(resp.success){
+                    globalLoader.hide();
+                    // alertFactory.success(null, resp.message);
+                    deffered.resolve(resp.data);
+                }
+                else{
+                    globalLoader.hide();
+                    // alertFactory.error(null, resp.message);
+                    deffered.reject(resp);
+                }
+            }, function(err){
+                globalLoader.hide();
+                deffered.reject(err);
+            });
+            return deffered.promise;
+        }
+
     }
 
 }());

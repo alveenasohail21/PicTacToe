@@ -3,8 +3,6 @@
         <ng-include ng-if="user" src="'src/layouts/sidebar.html'"></ng-include>
         <!-- /#page-content-wrapper -->
 
-
-
         <div id="page-content-wrapper">
             <div class="container-fluid orders">
                 <div class="order-status text-center">
@@ -34,36 +32,59 @@
                 </div>
 
 
-                <div class="orders-list">
-                    <h2 class="text-center">
-                        Orders
-                    </h2>
-                    <table id="orders-list" class="display responsive nowrap table table-striped" cellspacing="0" width="100%">
-                        <thead>
-                        <tr>
-                            <th>Action</th>
-                            <th>Billing Id</th>
-                            <th>Shipping Id</th>
-                            <th>Delivery Date From</th>
-                            <th>Delivery Date To</th>
-                            <th>Grand Total</th>
-                            <th>Order Date</th>
-                            <th>status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="order in vm.orders">
-                            <td>{{order.action}}</td>
-                            <td>{{order.billing_id}}</td>
-                            <td>{{order.shipping_id}}</td>
-                            <td>{{order.delivery_date_from}}</td>
-                            <td>{{order.grand_total}}</td>
-                            <td>{{order.order_date}}</td>
-                            <td>{{order.status}}</td>
+                <form name="searchOrderForm" class="row">
+                    <div class="col col-sm-8">
+                        <input type="text" name="orderField" placeholder="Search Order by Id.." class="form-control" ng-model="orderField" required>
+                    </div>
+                    <div class="col col-sm-4">
+                        <button class="btn btn-info" ng-disabled="searchOrderForm.orderField.$invalid" ng-click="vm.findOrder(orderField)"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </form>
 
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="orders-list">
+                    <div ng-if="vm.orders.length===0"><h2 class="text-center">No Orders Found</h2></div>
+                    <div ng-if="vm.orders.length>0">
+                        <h2 class="text-center">
+                            Orders
+                        </h2>
+                        <table id="orders-list" class="display responsive nowrap table table-striped" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Action</th>
+                                <th>Billing Id</th>
+                                <th>Shipping Id</th>
+                                <th>Delivery Date From</th>
+                                <th>Delivery Date To</th>
+                                <th>Grand Total</th>
+                                <th>Order Date</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="order in vm.orders">
+                                <td>{{order.id}}</td>
+                                <td>{{order.action}}</td>
+                                <td>{{order.billing_id}}</td>
+                                <td>{{order.shipping_id}}</td>
+                                <td>{{order.delivery_date_from}}</td>
+                                <td>{{order.delivery_date_to}}</td>
+                                <td>{{order.grand_total}}</td>
+                                <td>{{order.order_date}}</td>
+                                <td>
+                                    <select ng-model="order.status" class="form-control">
+                                        <option>Pending</option>
+                                        <option>Cancelled</option>
+                                        <option>In Process</option>
+                                        <option>Shipped</option>
+                                    </select>
+                                </td>
+                                <td><button class="btn btn-primary btn-sm" ng-click="vm.updateOrder(order.id, order.status)">Update</button></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
 

@@ -13,9 +13,7 @@
                     </div>
                 </form>
                 <div class="users-list">
-
                     <div ng-if="vm.users.length===0"><h2 class="text-center">No Users Found</h2></div>
-
                     <div ng-if="vm.users.length>0">
                         <h2 class="text-center">Users</h2>
                         <table id="users-list" class="display responsive nowrap table table-striped" cellspacing="0" width="100%">
@@ -30,6 +28,7 @@
                                 <th>Status</th>
                                 <th>Email</th>
                                 <th>Joined Date</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -40,10 +39,17 @@
                                 <td>{{user.full_address}}</td>
                                 <td>{{user.mobile_number}}</td>
                                 <td>{{user.phone_number}}</td>
-                                <td>{{user.status}}</td>
+                                <td>
+                                    <select ng-model="user.status" class="form-control">
+                                        <option>Active</option>
+                                        <option>Pending</option>
+                                        <option>In Process</option>
+                                        <option>Block</option>
+                                    </select>
+                                </td>
                                 <td>{{user.email}}</td>
                                 <td>{{user.joined_date}}</td>
-
+                                <td><button class="btn btn-primary btn-sm" ng-click="vm.updateUser(user.id, user.status)">Update</button></td>
                             </tr>
                             </tbody>
                         </table>

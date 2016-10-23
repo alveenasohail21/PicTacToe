@@ -20,12 +20,16 @@
         vm.users=r_users.users;
         //method assignment
         vm.findUser=findUser;
+        vm.updateUser=updateUser;
 
         function findUser(value) {
             UsersFactory.userSearch(value).then(function (response) {
                 vm.users=response.users;
                 console.log("User Search API", response);
             });
+        }
+        function updateUser(id, value) {
+            UsersFactory.updateUser(id.toString(), value);
         }
         function init() {
 
