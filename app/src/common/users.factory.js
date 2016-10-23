@@ -17,6 +17,15 @@
             from: 1,
             size: 10
         };
+        const DefaultTimeParams={
+            from: '2016-10-22',
+            to: '2016-10-23'
+        };
+        const DefaultSearchParams={
+            skip: 1,
+            limit: 10,
+            value: 'test'
+        };
         return {
             getAllusers: getAllusers,
             userSearch: userSearch,
@@ -24,12 +33,14 @@
             userSearchByTime: userSearchByTime
         };
 
-        function getAllusers(queryParams){
+        function getAllusers(from, to){
             globalLoader.show();
-            //get all orders
+            var queryParams={
+                from: from || DefaultSearchParams.from,
+                to: to || DefaultSearchParams.to
+            };
             var deffered = $q.defer();
-            var dataToAttachOnUrl = queryParams || DefaultQueryParams;
-            restFactory.users.getAllusers(dataToAttachOnUrl).then(function(resp){
+            restFactory.users.getAllusers(queryParams).then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
                     // alertFactory.success(null, resp.message);
@@ -46,12 +57,16 @@
             });
             return deffered.promise;
         }
-        function userSearch(queryParams, value){
+
+        function userSearch(skip, limit, value){
             globalLoader.show();
-            //get all orders
+            var queryParams={
+                skip: skip || DefaultSearchParams.skip,
+                limit: limit || DefaultSearchParams.limit,
+                value: value || DefaultSearchParams.value
+            };
             var deffered = $q.defer();
-            var dataToAttachOnUrl = queryParams || DefaultQueryParams;
-            restFactory.users.userSearch(dataToAttachOnUrl, value).then(function(resp){
+            restFactory.users.userSearch(queryParams).then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
                     // alertFactory.success(null, resp.message);
@@ -68,6 +83,7 @@
             });
             return deffered.promise;
         }
+
         function updateUser(id, value){
             globalLoader.show();
             //get all orders
@@ -89,9 +105,13 @@
             });
             return deffered.promise;
         }
-        function userSearchByTime(queryParams){
+
+        function userSearchByTime(from , to){
             globalLoader.show();
-            //get all orders
+            var queryParams={
+                from: from || DefaultTimeParams.from,
+                to: to || DefaultTimeParams.to
+            };
             var deffered = $q.defer();
             restFactory.users.userSearchByTime(queryParams).then(function(resp){
                 if(resp.success){

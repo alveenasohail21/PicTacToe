@@ -63,7 +63,7 @@
       return Admin.one('orders').one(id).get();
     }
 //////////////////////////////////////////////////////////////////
-    function userSearch(queryParams, value){
+    function userSearch(queryParams){
       return Admin.one('users').one('search').post(null, queryParams);
     }
 
@@ -75,7 +75,7 @@
       return Admin.one('users').one('searchbytime').post(null, queryParams);
     }
 
-    function orderSearch(queryParams, value){
+    function orderSearch(queryParams){
       return Admin.one('orders').one('search').post(null, queryParams);
     }
 

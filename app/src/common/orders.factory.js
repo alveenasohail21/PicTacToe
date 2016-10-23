@@ -15,6 +15,15 @@
             from: 1,
             size: 10
         };
+        const DefaultTimeParams={
+            from: '2016-10-22',
+            to: '2016-10-23'
+        };
+        const DefaultSearchParams={
+            skip: 1,
+            limit: 10,
+            value: 1
+        };
         /* Return Functions */
         return {
             getAllOrders: getAllOrders,
@@ -25,12 +34,14 @@
         };
         /* Define Fuctions */
 
-        function getAllOrders(queryParams){
+        function getAllOrders(from, size){
             globalLoader.show();
-            //get all orders
+            var queryParams={
+                from: from || DefaultTimeParams.from,
+                size: size || DefaultTimeParams.size
+            };
             var deffered = $q.defer();
-            var dataToAttachOnUrl = queryParams || DefaultQueryParams;
-            restFactory.orders.getAllOrders(dataToAttachOnUrl).then(function(resp){
+            restFactory.orders.getAllOrders(queryParams).then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
                     // alertFactory.success(null, resp.message);
@@ -47,6 +58,7 @@
             });
             return deffered.promise;
         }
+
         function getOrdersStatus(){
             globalLoader.show();
             //get all orders
@@ -69,6 +81,7 @@
             });
             return deffered.promise;
         }
+
         function getOrderDetails(id){
             globalLoader.show();
             //get all orders
@@ -90,34 +103,16 @@
             });
             return deffered.promise;
         }
-        function orderSearch(queryParams, value){
+
+        function orderSearch(skip, limit, value){
             globalLoader.show();
-            //get all orders
+            var queryParams={
+                skip: skip || DefaultSearchParams.skip,
+                limit: limit || DefaultSearchParams.limit,
+                value: value || DefaultSearchParams.value
+            };
             var deffered = $q.defer();
-            var dataToAttachOnUrl = queryParams || DefaultQueryParams;
-            restFactory.orders.orderSearch(dataToAttachOnUrl, value).then(function(resp){
-                if(resp.success){
-                    globalLoader.hide();
-                    // alertFactory.success(null, resp.message);
-                    deffered.resolve(resp.data);
-                }
-                else{
-                    globalLoader.hide();
-                    // alertFactory.error(null, resp.message);
-                    deffered.reject(resp);
-                }
-            }, function(err){
-                globalLoader.hide();
-                deffered.reject(err);
-            });
-            return deffered.promise;
-        }
-        function orderSearchByTime(queryParams){
-            globalLoader.show();
-            //get all orders
-            var deffered = $q.defer();
-            var dataToAttachOnUrl = queryParams || DefaultQueryParams;
-            restFactory.orders.orderSearchByTime(dataToAttachOnUrl, value).then(function(resp){
+            restFactory.orders.orderSearch(queryParams).then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
                     // alertFactory.success(null, resp.message);
@@ -135,8 +130,30 @@
             return deffered.promise;
         }
 
-
-
+        function orderSearchByTime(from, to){
+            globalLoader.show();
+            var queryParams={
+                from: from || DefaultTimeParams.from,
+                to: to || DefaultTimeParams.to
+            };
+            var deffered = $q.defer();
+            restFactory.orders.orderSearchByTime(queryParams, value).then(function(resp){
+                if(resp.success){
+                    globalLoader.hide();
+                    // alertFactory.success(null, resp.message);
+                    deffered.resolve(resp.data);
+                }
+                else{
+                    globalLoader.hide();
+                    // alertFactory.error(null, resp.message);
+                    deffered.reject(resp);
+                }
+            }, function(err){
+                globalLoader.hide();
+                deffered.reject(err);
+            });
+            return deffered.promise;
+        }
     }
 
 }());

@@ -33,7 +33,7 @@
             // initializer
             function init(){
                 $(document).ready(function() {
-                    console.log("Assets: Loading");
+
                     /*
                      *  Open these functions when you need to load assets and fonts on run time
                      * */

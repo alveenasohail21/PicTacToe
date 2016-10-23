@@ -13,17 +13,15 @@
         .controller('OrdersCtrl', OrdersCtrl);
 
     /* @ngInject */
-    function OrdersCtrl(r_orders, r_orders_status){
+    function OrdersCtrl(r_orders, r_orders_status, OrdersFactory){
         var vm = this;
         vm.orderCount=r_orders.totalcount;
         vm.orders=r_orders.users;
         vm.ordersStatus=r_orders_status;
-        console.log(vm.orders);
-        console.log(vm.ordersStatus);
         vm.getOrderDetails=getOrderDetails;
 
         function getOrderDetails(id) {
-            dashboardFactory.getOrderDetails(id).then(function (response) {
+            OrdersFactory.getOrderDetails(id).then(function (response) {
                 vm.orderDetails=response;
                 console.log(vm.orderDetails);
             })
