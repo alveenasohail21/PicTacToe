@@ -27,7 +27,6 @@
         getAllusers: getAllusers,
         updateUser: updateUser,
         userSearch: userSearch,
-        adminToday: adminToday,
         userSearchByTime: userSearchByTime
       },
       orders:{
@@ -38,8 +37,9 @@
         orderSearchByTime: orderSearchByTime,
         updateOrder:updateOrder
       },
-      earning: {
+      analytics: {
         annualEarning: annualEarning,
+        adminToday: adminToday,
         earningByCity: earningByCity
       },
       oneUrl: oneUrl
@@ -91,10 +91,10 @@
       return Admin.one('orders').one('searchbytime').post(null, queryParams);
     }
 
+    /////////////////////////////////////////////////////////
     function adminToday(){
       return Admin.one('today').get();
     }
-    /////////////////////////////////////////////////////////
     function annualEarning(){
       return Admin.one('earning').one('annualearning').get();
     }
