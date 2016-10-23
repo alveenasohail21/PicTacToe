@@ -13,7 +13,7 @@
         .controller('UsersCtrl', UsersCtrl);
 
     /* @ngInject */
-    function UsersCtrl(dashboardFactory, r_users){
+    function UsersCtrl(r_users){
         var vm = this;
         vm.userCount=r_users.totalcount;
         vm.users=r_users.users;

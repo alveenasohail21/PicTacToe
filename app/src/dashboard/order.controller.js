@@ -13,7 +13,7 @@
         .controller('OrdersCtrl', OrdersCtrl);
 
     /* @ngInject */
-    function OrdersCtrl(dashboardFactory, r_orders, r_orders_status){
+    function OrdersCtrl(r_orders, r_orders_status){
         var vm = this;
         vm.orderCount=r_orders.totalcount;
         vm.orders=r_orders.users;
