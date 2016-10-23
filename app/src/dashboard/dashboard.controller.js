@@ -13,11 +13,11 @@
         .controller('DashboardCtrl', DashboardCtrl);
 
     /* @ngInject */
-    function DashboardCtrl(dashboardFactory){
+    function DashboardCtrl(OrdersFactory){
         var vm = this;
-        // dashboardFactory.getOrderDetails('1').then(function (response) {
-        //     console.log(response);
-        // });
+        OrdersFactory.getOrdersStatus().then(function (response) {
+            console.log(response);
+        });
     }
 
 }());

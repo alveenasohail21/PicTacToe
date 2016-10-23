@@ -30,8 +30,8 @@
             .state('Dashboard.Users', {
                     url:'/users',
                     resolve: {
-                        r_users: function (dashboardFactory) {
-                            return dashboardFactory.getAllusers();
+                        r_users: function (UsersFactory) {
+                            return UsersFactory.getAllusers();
                         }
                     },
 
@@ -46,11 +46,11 @@
             .state('Dashboard.Orders', {
                     url:'/orders',
                     resolve: {
-                        r_orders: function (dashboardFactory) {
-                            return dashboardFactory.getAllOrders();
+                        r_orders: function (OrdersFactory) {
+                            return OrdersFactory.getAllOrders();
                         },
-                        r_orders_status: function (dashboardFactory) {
-                            return dashboardFactory.getOrdersStatus();
+                        r_orders_status: function (OrdersFactory) {
+                            return OrdersFactory.getOrdersStatus();
                         }
 
                     },

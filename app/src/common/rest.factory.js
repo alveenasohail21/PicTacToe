@@ -16,13 +16,6 @@
   function restFactory(Restangular, $localStorage){
 
     /* Rest Objects */
-    var Users = Restangular.all('users');
-    var Auth = Restangular.all('auth');
-    var Photos = Restangular.all('photos');
-    var Media = Restangular.all('media');
-    var Products = Restangular.all('products');
-    var Album= Restangular.all('albums');
-    var Project= Restangular.all('projects');
     var Admin= Restangular.all('admin');
 
     /* Return Functions */
@@ -32,12 +25,17 @@
       },
       users:{
         getAllusers: getAllusers,
-        searchUser: searchUser
+        updateUser: updateUser,
+        userSearch: userSearch,
+        adminToday: adminToday,
+        userSearchByTime: userSearchByTime
       },
       orders:{
         getAllOrders: getAllOrders,
         getOrdersStatus: getOrdersStatus,
-        getOrderDetails: getOrderDetails
+        getOrderDetails: getOrderDetails,
+        orderSearch: orderSearch,
+        orderSearchByTime: orderSearchByTime
       },
       oneUrl: oneUrl
     };
@@ -52,17 +50,41 @@
     function getAllusers(queryParams){
       return Admin.one('users').get(queryParams);
     }
+
     function getAllOrders(queryParams){
       return Admin.one('orders').get(queryParams);
     }
+
     function getOrdersStatus(){
       return Admin.one('orders').one('status').get();
     }
+
     function getOrderDetails(id){
       return Admin.one('orders').one(id).get();
     }
-    function searchUser(queryParams, value){
+//////////////////////////////////////////////////////////////////
+    function userSearch(queryParams, value){
       return Admin.one('users').one('search').post(null, queryParams);
+    }
+
+    function updateUser(id, value){
+      return Admin.one('users').one(id).customPUT({status: value});
+    }
+
+    function userSearchByTime(queryParams){
+      return Admin.one('users').one('searchbytime').post(null, queryParams);
+    }
+
+    function orderSearch(queryParams){
+      return Admin.one('orders').one('search').post(null, queryParams);
+    }
+
+    function orderSearchByTime(queryParams){
+      return Admin.one('orders').one('searchbytime').post(null, queryParams);
+    }
+
+    function adminToday(){
+      return Admin.one('today').get();
     }
   }
 }());
