@@ -58,7 +58,8 @@
             return deffered.promise;
         }
 
-        function userSearch(skip, limit, value){
+        function userSearch(value, skip, limit){
+            //search user by any field
             globalLoader.show();
             var queryParams={
                 skip: skip || DefaultSearchParams.skip,
