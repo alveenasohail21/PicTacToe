@@ -21,8 +21,10 @@
 
         return {
             adminToday: adminToday,
-            earningByCity:earningByCity,
-            annualEarning: annualEarning
+            earningByCity: earningByCity,
+            annualEarning: annualEarning,
+            formatDataForChart: formatDataForChart,
+
 
         };
 
@@ -32,7 +34,7 @@
             restFactory.analytics.adminToday().then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
-                    _data.adminToday=response;
+                    _data.adminToday=resp.data;
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
@@ -53,7 +55,7 @@
             restFactory.analytics.annualEarning().then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
-                    _data.annualEarning=response;
+                    _data.annualEarning=resp.data;
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
@@ -74,7 +76,7 @@
             restFactory.analytics.earningByCity().then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
-                    _data.earningByCity=response;
+                    _data.earningByCity=resp.data;
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
@@ -90,7 +92,20 @@
             return deffered.promise;
         }
 
-
+        function formatDataForChart(rawObjectSelector, selector) {
+            var chartistData={
+                labels: [],
+                series: []
+            };
+            var tempSeries=[];
+            for(var i in _data[rawObjectSelector]){
+                var dataObject=_data[rawObjectSelector][i];
+                chartistData.labels.push(dataObject[selector]);
+                tempSeries.push(dataObject.total);
+            }
+            chartistData.series.push(tempSeries);
+            return chartistData
+        }
     }
 
 }());

@@ -29,6 +29,18 @@
             )
             .state('Dashboard.Analytics', {
                     url:'/analytics',
+                    resolve: {
+                        r_earningByCity: function (AnalyticsFactory) {
+                            return AnalyticsFactory.earningByCity();
+                        },
+                        r_annualEarning: function (AnalyticsFactory) {
+                            return AnalyticsFactory.annualEarning();
+                        },
+                        r_adminToday: function (AnalyticsFactory) {
+                            return AnalyticsFactory.adminToday();
+                        }
+                    },
+
                     views: {
                         '@':{
                             templateUrl:'src/dashboard/analytics.html',

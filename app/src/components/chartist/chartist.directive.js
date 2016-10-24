@@ -26,7 +26,8 @@
             replace: true,
             scope:{
                 chartMethod:'@',
-                chartElement: '@'
+                chartElement: '@',
+                chartData: '='
             }
         };
 
@@ -39,6 +40,7 @@
             //Method Assignment
             scope.lineChart = lineChart;
             scope.barChart = barChart;
+            console.log("in directive: ",scope.chartData);
 
             //Method Definitions
             function init() {
@@ -50,10 +52,10 @@
                 }, 100);
             }
             function lineChart(){
-                chartistFactory.lineChart(chartElement);
+                chartistFactory.lineChart(chartElement, scope.chartData);
             }
             function barChart(){
-                chartistFactory.barChart(chartElement);
+                chartistFactory.barChart(chartElement, scope.chartData);
             }
             init();
         }

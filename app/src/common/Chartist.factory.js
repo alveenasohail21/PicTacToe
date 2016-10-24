@@ -13,12 +13,7 @@
 
     function chartistFactory($rootScope, $timeout){
         /* Variables */
-        var defaultData = {
-            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
-            series: [
-                [5, 2, 4, 2, 0]
-            ]
-        };
+
         /* Return Methods */
         return {
             lineChart: lineChart,
@@ -26,17 +21,11 @@
         };
 
         /* Define Methods */
-        function lineChart(element, rawData, options) {
-            var data= rawData ? formatData(rawData) : defaultData;
-            new Chartist.Line(element, data || defaultData);
+        function lineChart(element, data, options) {
+            new Chartist.Line(element, data);
         }
-        function barChart(element, rawData, options) {
-            var data= rawData ? formatData(rawData) : defaultData;
-            new Chartist.Bar(element, data || defaultData);
-        }
-
-        function formatData(data){
-
+        function barChart(element, data, options) {
+            new Chartist.Bar(element, data);
         }
     }
 
