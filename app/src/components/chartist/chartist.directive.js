@@ -40,8 +40,6 @@
             //Method Assignment
             scope.lineChart = lineChart;
             scope.barChart = barChart;
-            console.log("in directive: ",scope.chartData);
-
             //Method Definitions
             function init() {
                 $timeout(function () {
