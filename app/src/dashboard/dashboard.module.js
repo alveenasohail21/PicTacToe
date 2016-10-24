@@ -106,6 +106,38 @@
                             templateUrl:'src/dashboard/media.html',
                             controller: 'MediaCtrl as vm'
                         }
+                    }
+                }
+            )
+            .state('Dashboard.Stickers', {
+                    url:'/stickers',
+                    views: {
+                        '@':{
+                            templateUrl:'src/dashboard/stickers-media.html',
+                            controller: 'MediaCtrl as vm'
+                        }
+                    },
+
+                }
+            )
+            .state('Dashboard.Fonts', {
+                    url:'/fonts',
+                    views: {
+                        '@':{
+                            templateUrl:'src/dashboard/fonts-media.html',
+                            controller: 'MediaCtrl as vm'
+                        }
+                    },
+
+                }
+            )
+            .state('Dashboard.AllMedia', {
+                    url:'/allmedia',
+                    views: {
+                        '@':{
+                            templateUrl:'src/dashboard/all-media.html',
+                            controller: 'MediaCtrl as vm'
+                        }
                     },
 
                 }

@@ -10,7 +10,7 @@
         .module('app.auth')
         .factory('MediaFactory', MediaFactory);
 
-    function MediaFactory($q, restFactory){
+    function MediaFactory($q, restFactory, Upload, $localStorage){
         /* Return Functions */
 
         const DefaultQueryParams = {
@@ -24,25 +24,22 @@
             getMedia:getMedia
         };
 
-        function addMedia(file){
+        function addMedia(media){
             globalLoader.show();
-            var deffered = $q.defer();
-            restFactory.media.addMedia(file).then(function(resp){
-                if(resp.success){
+            Upload.upload({
+                url : 'http://localhost:8000/admin/media',
+                headers: {
+                    token :   'Bearer' + '{'+$localStorage["token"]+'}'
+                },
+                data :  media
+            }).then(function(resp){
+                console.log("response :: ",resp);
+                if(resp.data.code == 0){
                     globalLoader.hide();
-                    // alertFactory.success(null, resp.message);
-                    deffered.resolve(resp.data);
-                }
-                else{
+                }else {
                     globalLoader.hide();
-                    // alertFactory.error(null, resp.message);
-                    deffered.reject(resp);
                 }
-            }, function(err){
-                globalLoader.hide();
-                deffered.reject(err);
             });
-            return deffered.promise;
         }
 
         function getMedia(from, size, all){

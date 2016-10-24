@@ -24,20 +24,7 @@
 
 
         vm.submitMedia = function() {
-            Upload.upload({
-                url : 'http://localhost:8000/admin/media',
-                headers: {
-                    token :   'Bearer' + '{'+$localStorage["token"]+'}'
-                },
-                data :  vm.newMedia
-            }).then(function(resp){
-                console.log("response :: ",resp);
-                if(resp.data.code == 0){
-                    alert("Done");
-                }else {
-                    alert(resp.data.text);
-                }
-            });
+            MediaFactory.addMedia(vm.newMedia);
         };
 
         //method assignment
