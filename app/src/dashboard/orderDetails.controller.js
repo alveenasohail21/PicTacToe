@@ -15,9 +15,10 @@
     /* @ngInject */
     function orderDetailsCtrl(OrdersFactory, $stateParams, r_details){
         var vm = this;
-
-        console.log("id: ", r_details);
-
+        vm.orderItems=r_details.orderDetails;
+        vm.orders=r_details.orders[0];
+        console.log("id: ", vm.orders);
+        console.log("id: ", vm.orderItems);
     }
 
 }());

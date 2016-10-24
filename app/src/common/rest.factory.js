@@ -61,7 +61,7 @@
     }
 
     function getOrdersStatus(){
-      return Admin.one('orders').one('status').get();
+      return Admin.one('status').one('orders').get();
     }
 
     function getOrderDetails(id){
@@ -69,7 +69,7 @@
     }
 //////////////////////////////////////////////////////////////////
     function userSearch(queryParams){
-      return Admin.one('users').one('search').post(null, queryParams);
+      return Admin.one('search').one('users').post(null, queryParams);
     }
 
     function updateUser(id, value){
@@ -80,15 +80,15 @@
     }
 
     function userSearchByTime(queryParams){
-      return Admin.one('users').one('searchbytime').post(null, queryParams);
+      return Admin.one('searchbytime').one('users').post(null, queryParams);
     }
 
     function orderSearch(queryParams){
-      return Admin.one('orders').one('search').post(null, queryParams);
+      return Admin.one('search').one('orders').post(null, queryParams);
     }
 
     function orderSearchByTime(queryParams){
-      return Admin.one('orders').one('searchbytime').post(null, queryParams);
+      return Admin.one('searchbytime').one('orders').post(null, queryParams);
     }
 
     /////////////////////////////////////////////////////////

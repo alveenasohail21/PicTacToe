@@ -16,9 +16,9 @@
     function DashboardCtrl(OrdersFactory, UsersFactory, AnalyticsFactory){
         var vm = this;
 
-        // UsersFactory.userSearchByTime().then(function (response) {
-        //     console.log("User Search API", response);
-        // });
+        UsersFactory.userSearchByTime().then(function (response) {
+            console.log("User Search API", response);
+        });
     }
 
 }());
