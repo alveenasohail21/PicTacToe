@@ -20,6 +20,7 @@
         vm.users=r_users.users;
         //method assignment
         vm.findUser=findUser;
+        vm.findUserByTime=findUserByTime;
         vm.updateUser=updateUser;
 
         function findUser(value) {
@@ -28,9 +29,19 @@
                 console.log("User Search API", response);
             });
         }
+        function findUserByTime(from, to) {
+            UsersFactory.userSearchByTime(formatDate(from), formatDate(to)).then(function (response) {
+                vm.users=response;
+            });
+        }
         function updateUser(id, value) {
             UsersFactory.updateUser(id.toString(), value);
         }
+
+        function formatDate(rawDate) {
+            return moment(rawDate).format("YYYY-MM-DD")
+        }
+
         function init() {
 
         }

@@ -138,7 +138,7 @@
                 to: to || DefaultTimeParams.to
             };
             var deffered = $q.defer();
-            restFactory.orders.orderSearchByTime(queryParams, value).then(function(resp){
+            restFactory.orders.orderSearchByTime(queryParams).then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
                     // alertFactory.success(null, resp.message);

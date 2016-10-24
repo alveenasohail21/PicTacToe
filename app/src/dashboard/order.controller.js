@@ -23,6 +23,7 @@
         //method assignment
         vm.getOrderDetails=getOrderDetails;
         vm.findOrder=findOrder;
+        vm.findOrderByTime=findOrderByTime;
         vm.updateOrder=updateOrder;
 
         //method definitions
@@ -32,14 +33,26 @@
                 console.log("Orders Search API", response);
             });
         }
+
+        function findOrderByTime(from, to) {
+            OrdersFactory.orderSearchByTime(formatDate(from), formatDate(to)).then(function (response) {
+                vm.orders=response;
+            });
+        }
+
         function updateOrder(id, value) {
             OrdersFactory.updateOrder(id.toString(), value);
         }
+
         function getOrderDetails(id) {
             OrdersFactory.getOrderDetails(id).then(function (response) {
                 vm.orderDetails=response;
                 console.log(vm.orderDetails);
             })
+        }
+
+        function formatDate(rawDate) {
+            return moment(rawDate).format("YYYY-MM-DD")
         }
     }
 

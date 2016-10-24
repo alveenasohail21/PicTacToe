@@ -4,14 +4,27 @@
         <!-- /#page-content-wrapper -->
         <div id="page-content-wrapper">
             <div class="container-fluid users">
-                <form name="searchUserForm" class="row">
-                    <div class="col col-sm-8">
-                        <input type="text" name="userField" placeholder="Search User.." class="form-control" ng-model="userField" required>
-                    </div>
-                    <div class="col col-sm-4">
-                        <button class="btn btn-info" ng-disabled="searchUserForm.userField.$invalid" ng-click="vm.findUser(userField)"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </div>
-                </form>
+                <div class="search-form">
+                    <form name="searchUserForm" class="row">
+                        <div class="col col-sm-8">
+                            <input type="text" name="userField" placeholder="Search User.." class="form-control" ng-model="userField" required>
+                        </div>
+                        <div class="col col-sm-4">
+                            <button class="btn btn-info" ng-disabled="searchUserForm.userField.$invalid" ng-click="vm.findUser(userField)"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </div>
+                    </form>
+                    <form name="searchUserByTimeForm" class="row">
+                        <div class="col col-sm-4">
+                            <input type="date" class="form-control" ng-model="fromField" required>
+                        </div>
+                        <div class="col col-sm-4">
+                            <input type="date" class="form-control" ng-model="toField" required>
+                        </div>
+                        <div class="col col-sm-4">
+                            <button class="btn btn-info" ng-disabled="searchUserByTimeForm.$invalid" ng-click="vm.findUserByTime(fromField, toField)"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </div>
+                    </form>
+                </div>
                 <div class="users-list">
                     <div ng-if="vm.users.length===0"><h2 class="text-center">No Users Found</h2></div>
                     <div ng-if="vm.users.length>0">

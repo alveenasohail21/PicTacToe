@@ -18,8 +18,8 @@
                 size: 10
             };
             const DefaultTimeParams={
-                from: '2016-10-22',
-                to: '2016-10-23'
+                from: '2016-10-03',
+                to: '2016-10-04'
             };
             const DefaultSearchParams={
                 skip: 1,

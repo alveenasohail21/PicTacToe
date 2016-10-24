@@ -13,22 +13,12 @@
         .controller('DashboardCtrl', DashboardCtrl);
 
     /* @ngInject */
-    function DashboardCtrl(OrdersFactory, UsersFactory){
+    function DashboardCtrl(OrdersFactory, UsersFactory, AnalyticsFactory){
         var vm = this;
-        // OrdersFactory.orderSearch().then(function (response) {
-        //     console.log("Order Search API", response);
-        // });
-        // UsersFactory.userSearch().then(function (response) {
-        //     console.log("User Search API", response);
-        // });
 
-
-        // UsersFactory.userSearchByTime().then(function (response) {
-        //     console.log("User Search API", response);
-        // });
-
-
-        // UsersFactory.updateUser('2', 'Active');
+        UsersFactory.userSearchByTime().then(function (response) {
+            console.log("User Search API", response);
+        });
     }
 
 }());
