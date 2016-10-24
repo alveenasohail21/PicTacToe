@@ -109,7 +109,7 @@
       return Admin.one('media').one('add').post(null, file);
     }
     function getMedia(){
-      return Admin.one('media').get();
+      return Restangular.one('media').one('get').get();
     }
   }
 }());

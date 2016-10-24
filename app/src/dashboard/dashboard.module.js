@@ -98,6 +98,17 @@
                     },
 
                 }
+            )
+            .state('Dashboard.Media', {
+                    url:'/media',
+                    views: {
+                        '@':{
+                            templateUrl:'src/dashboard/media.html',
+                            controller: 'MediaCtrl as vm'
+                        }
+                    },
+
+                }
             );
 
     }

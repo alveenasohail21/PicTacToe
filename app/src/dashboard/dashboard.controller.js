@@ -15,17 +15,13 @@
     /* @ngInject */
     function DashboardCtrl(OrdersFactory, UsersFactory, AnalyticsFactory, MediaFactory){
         var vm = this;
-        AnalyticsFactory.adminToday().then(function (response) {
-            //problem in this api
-            console.log("Admin Today: ", response);
-        });
-        AnalyticsFactory.annualEarning().then(function (response) {
-            //problem in this api
-            console.log("Annual Earning: ", response);
-        });
-        AnalyticsFactory.earningByCity().then(function (response) {
-            //problem in this api
-            console.log("Earning by City: ", response);
+        // AnalyticsFactory.adminToday().then(function (response) {
+        //     //problem in this api
+        //     console.log("Admin Today: ", response);
+        // });
+        MediaFactory.getMedia().then(function (response) {
+            //problem in this api route issue
+            console.log("Media: ", response);
         });
 
 
