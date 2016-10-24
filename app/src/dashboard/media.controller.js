@@ -13,21 +13,37 @@
         .controller('MediaCtrl', MediaCtrl);
 
     /* @ngInject */
-    function MediaCtrl(MediaFactory, Upload){
+    function MediaCtrl(MediaFactory, Upload, $localStorage){
         //variable assignment
         var vm = this;
-        vm.submit = function() {
-            console.log("here");
-            // if ($scope.form.file.$valid && $scope.file) {
-            //     $scope.upload($scope.file);
-            // }
+
+        vm.newMedia={};
+        vm.newMedia.theme="Standard";
+        vm.newMedia.type="Stickers";
+
+
+
+        vm.submitMedia = function() {
+            Upload.upload({
+                url : 'http://localhost:8000/admin/media',
+                headers: {
+                    token :   'Bearer' + '{'+$localStorage["token"]+'}'
+                },
+                data :  vm.newMedia
+            }).then(function(resp){
+                console.log("response :: ",resp);
+                if(resp.data.code == 0){
+                    alert("Done");
+                }else {
+                    alert(resp.data.text);
+                }
+            });
         };
 
         //method assignment
 
 
         // method definitions
-
 
     }
 

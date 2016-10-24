@@ -1,4 +1,4 @@
-<script src="../../../../pictaktoe-ng-web/app/src/dashboard/upload/webapp-step1.controller.js"></script>
+
 <div class="sidebar">
     <div id="wrapper">
         <ng-include ng-if="user" src="'src/layouts/sidebar.html'"></ng-include>
@@ -7,37 +7,18 @@
             <div class="container-fluid orders">
                 <h2 class="text-center">Media</h2>
                 <div class="search-form">
-<!--
-                    <form name="searchOrderForm" class="row">
-                        <div class="col col-sm-8">
-                            <input type="text" name="orderField" placeholder="Search Order by Id.." class="form-control" ng-model="orderField" required>
-                        </div>
-                        <div class="col col-sm-4">
-                            <button class="btn btn-info" ng-disabled="searchOrderForm.orderField.$invalid" ng-click="vm.findOrder(orderField)"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </div>
+                    <form ng-submit="vm.submitMedia()" name="MediaForm">
+                        <input name="name" placeholder="Name: " class="form-control" type="text" ng-model="vm.newMedia.name" required>
+
+                        <select ng-model="vm.newMedia.type" name="type" class="form-control">
+                            <option>Fonts</option>
+                            <option>Stickers</option>
+                        </select>
+                        <input name="theme" placeholder="Theme: " class="form-control" type="text" ng-model="vm.newMedia.theme">
+                        <label>Upload Image : <input required type="file"  ngf-select  ng-model="vm.newMedia.media"></label>
+                        <button class="btn btn-info btn-lg btn-block" type="submit" ng-disabled="MediaForm.$invalid">Add Media</button>
                     </form>
--->
-
-                    <div class="details">or
-                        <a class="cursor-pointer"
-                           ngf-select="vm.submit()"
-                           ngf-max-size="20MB" multiple accept="image/*">browse</a>
-                        your photo files
-                    </div>
-
-                    <!--<form name="form">-->
-                        <!--Single Image with validations-->
-                        <!--<div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"-->
-                             <!--ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"-->
-                             <!--ngf-resize="{width: 100, height: 100}">Select</div>-->
-                        <!--Multiple files-->
-                        <!--<div class="button" ngf-select ng-model="files" ngf-multiple="true">Select</div>-->
-                        <!--Drop files: <div ngf-drop ng-model="files" class="drop-box">Drop</div>-->
-                        <!--<button type="submit" ng-click="submit()">submit</button>-->
-                    <!--</form>-->
-
                 </div>
-
             </div>
         </div>
     </div>

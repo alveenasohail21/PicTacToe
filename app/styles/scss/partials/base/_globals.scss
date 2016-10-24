@@ -165,6 +165,9 @@ Scrollbar
 .alert-success{
   border-top: 5px solid #3c763d;
 }
+.cursor-pointer{
+  cursor: pointer;
+}
 
 /* MIXINS */
 @mixin aspect-ratio($width, $height) {
