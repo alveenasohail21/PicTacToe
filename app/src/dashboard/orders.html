@@ -76,7 +76,7 @@
                             </thead>
                             <tbody>
                             <tr ng-repeat="order in vm.orders">
-                                <td>{{order.id}}</td>
+                                <td><a ui-sref="Dashboard.OrderDetails({id: order.id})">{{order.id}}</a></td>
                                 <td>{{order.action}}</td>
                                 <td>{{order.billing_id}}</td>
                                 <td>{{order.shipping_id}}</td>

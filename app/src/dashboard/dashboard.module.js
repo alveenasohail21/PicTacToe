@@ -62,7 +62,6 @@
                         r_orders_status: function (OrdersFactory) {
                             return OrdersFactory.getOrdersStatus();
                         }
-
                     },
                     views: {
                         '@':{
@@ -70,6 +69,22 @@
                             controller: 'OrdersCtrl as vm'
                         }
                     }
+                }
+            )
+            .state('Dashboard.OrderDetails', {
+                    url:'/orders/:id',
+                    resolve: {
+                        r_details: function ($stateParams, OrdersFactory) {
+                            return OrdersFactory.getOrderDetails($stateParams.id);
+                        }
+                    },
+                    views: {
+                        '@':{
+                            templateUrl:'src/dashboard/order-details.html',
+                            controller: 'orderDetailsCtrl as vm'
+                        }
+                    },
+
                 }
             );
 
