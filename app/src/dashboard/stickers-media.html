@@ -6,9 +6,28 @@
         <div id="page-content-wrapper">
             <div class="container-fluid orders">
                 <h2 class="text-center">Stickers</h2>
-                <div class="search-form">
-
-                </div>
+                <table id="media-list" class="display responsive nowrap table table-striped" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Theme</th>
+                        <th>Type</th>
+                        <th>Extension</th>
+                        <th>Created At</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="m in vm.mediaData.stickers">
+                        <td>{{m.name}}</td>
+                        <td>{{m.theme}}</td>
+                        <td>{{m.type}}</td>
+                        <td>{{m.extension}}</td>
+                        <td>{{m.created_at}}</td>
+                        <td><button class="btn btn-danger btn-sm" ng-click="vm.deleteMedia(m._id, m.type)">Delete</button></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

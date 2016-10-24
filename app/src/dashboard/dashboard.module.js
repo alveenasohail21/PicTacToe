@@ -95,8 +95,7 @@
                             templateUrl:'src/dashboard/order-details.html',
                             controller: 'orderDetailsCtrl as vm'
                         }
-                    },
-
+                    }
                 }
             )
             .state('Dashboard.Media', {
@@ -117,7 +116,11 @@
                             controller: 'MediaCtrl as vm'
                         }
                     },
-
+                    resolve: {
+                        r_stickers: function ($stateParams, MediaFactory) {
+                            return MediaFactory.getMedia(null, null, false, 'Stickers');
+                        }
+                    }
                 }
             )
             .state('Dashboard.Fonts', {
@@ -128,6 +131,12 @@
                             controller: 'MediaCtrl as vm'
                         }
                     },
+                    resolve: {
+                        r_fonts: function ($stateParams, MediaFactory) {
+                            return MediaFactory.getMedia(null, null, false, 'Fonts');
+                        }
+                    }
+
 
                 }
             )
@@ -139,10 +148,13 @@
                             controller: 'MediaCtrl as vm'
                         }
                     },
-
+                    resolve: {
+                        r_allMedia: function ($stateParams, MediaFactory) {
+                            return MediaFactory.getMedia(null, null, true, 'none');
+                        }
+                    }
                 }
             );
-
     }
 
 }());

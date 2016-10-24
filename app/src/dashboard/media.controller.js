@@ -13,24 +13,25 @@
         .controller('MediaCtrl', MediaCtrl);
 
     /* @ngInject */
-    function MediaCtrl(MediaFactory, Upload, $localStorage){
+    function MediaCtrl(MediaFactory){
         //variable assignment
         var vm = this;
-
         vm.newMedia={};
         vm.newMedia.theme="Standard";
         vm.newMedia.type="Stickers";
-
-
-
-        vm.submitMedia = function() {
-            MediaFactory.addMedia(vm.newMedia);
-        };
+        vm.mediaData=MediaFactory._data;
 
         //method assignment
-
+        vm.submitMedia=submitMedia;
+        vm.deleteMedia=deleteMedia;
 
         // method definitions
+        function submitMedia() {
+            MediaFactory.addMedia(vm.newMedia);
+        }
+        function deleteMedia(id, type) {
+            MediaFactory.deleteMedia(id, type);
+        }
 
     }
 

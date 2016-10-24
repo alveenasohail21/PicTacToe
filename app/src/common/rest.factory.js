@@ -44,7 +44,8 @@
       },
       media:{
         addMedia:addMedia,
-        getMedia:getMedia
+        getMedia:getMedia,
+        deleteMedia:deleteMedia
       },
       oneUrl: oneUrl
     };
@@ -110,6 +111,9 @@
     }
     function getMedia(queryParams){
       return Restangular.one('media').one('get').get(queryParams);
+    }
+    function deleteMedia(id){
+      return Admin.one('media').one(id).remove();
     }
   }
 }());
