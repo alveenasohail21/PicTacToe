@@ -13,10 +13,15 @@
         .controller('MediaCtrl', MediaCtrl);
 
     /* @ngInject */
-    function MediaCtrl(MediaFactory){
+    function MediaCtrl(MediaFactory, Upload){
         //variable assignment
         var vm = this;
-
+        vm.submit = function() {
+            console.log("here");
+            // if ($scope.form.file.$valid && $scope.file) {
+            //     $scope.upload($scope.file);
+            // }
+        };
 
         //method assignment
 

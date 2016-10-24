@@ -6,16 +6,17 @@
 
 (function(){
 
-  'use strict';
+    'use strict';
 
-  angular.module('app.core', [
-    'ui.router',
-    'restangular',
-    'ngAnimate',
-    'ngStorage',
-    'ngMessages',
-    'ngFileUpload',
-    'satellizer'
-  ]);
+    angular.module('app.core', [
+        'ui.router',
+        'restangular',
+        'ngAnimate',
+        'ngStorage',
+        'ngMessages',
+        'satellizer',
+        'ngFileUpload'
+
+    ]);
 
 }());

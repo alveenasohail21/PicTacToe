@@ -108,8 +108,8 @@
     function addMedia(file){
       return Admin.one('media').one('add').post(null, file);
     }
-    function getMedia(){
-      return Restangular.one('media').one('get').get();
+    function getMedia(queryParams){
+      return Restangular.one('media').one('get').get(queryParams);
     }
   }
 }());
