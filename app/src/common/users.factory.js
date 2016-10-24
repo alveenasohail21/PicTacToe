@@ -91,6 +91,7 @@
                 var deffered = $q.defer();
                 restFactory.users.updateUser(id, value).then(function(resp){
                     if(resp.success){
+                        console.log(resp);
                         globalLoader.hide();
                         // alertFactory.success(null, resp.message);
                         deffered.resolve(resp.data);

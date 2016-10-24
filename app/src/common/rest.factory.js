@@ -42,6 +42,10 @@
         adminToday: adminToday,
         earningByCity: earningByCity
       },
+      media:{
+        addMedia:addMedia,
+        getMedia:getMedia
+      },
       oneUrl: oneUrl
     };
 
@@ -101,8 +105,11 @@
     function earningByCity(){
       return Admin.one('earning').one('bycity').get();
     }
-    // function media(){
-    //   return Admin.one('earning').one('bycity').get();
-    // }
+    function addMedia(file){
+      return Admin.one('media').one('add').post(null, file);
+    }
+    function getMedia(){
+      return Admin.one('media').get();
+    }
   }
 }());

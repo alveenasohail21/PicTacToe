@@ -13,12 +13,27 @@
         .controller('DashboardCtrl', DashboardCtrl);
 
     /* @ngInject */
-    function DashboardCtrl(OrdersFactory, UsersFactory, AnalyticsFactory){
+    function DashboardCtrl(OrdersFactory, UsersFactory, AnalyticsFactory, MediaFactory){
         var vm = this;
-
-        UsersFactory.userSearchByTime().then(function (response) {
-            console.log("User Search API", response);
+        AnalyticsFactory.adminToday().then(function (response) {
+            //problem in this api
+            console.log("Admin Today: ", response);
         });
+        AnalyticsFactory.annualEarning().then(function (response) {
+            //problem in this api
+            console.log("Annual Earning: ", response);
+        });
+        AnalyticsFactory.earningByCity().then(function (response) {
+            //problem in this api
+            console.log("Earning by City: ", response);
+        });
+
+
+
+
+
+        // UsersFactory.updateUser('1', 'Active');
+        // OrdersFactory.updateUser('1', 'Shipped');
     }
 
 }());

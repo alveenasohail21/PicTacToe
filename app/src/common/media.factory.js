@@ -8,73 +8,22 @@
     'use strict';
     angular
         .module('app.auth')
-        .factory('AnalyticsFactory', AnalyticsFactory);
+        .factory('MediaFactory', MediaFactory);
 
-    function AnalyticsFactory($q, restFactory){
+    function MediaFactory($q, restFactory){
         /* Return Functions */
 
-        var _data={
-            annualEarning: {},
-            adminToday: {},
-            earningByCity: {}
-        };
-
         return {
-            adminToday: adminToday,
-            earningByCity:earningByCity,
-            annualEarning: annualEarning
-
+            addMedia: addMedia,
+            getMedia:getMedia
         };
 
-        function adminToday(){
+        function addMedia(file){
             globalLoader.show();
             var deffered = $q.defer();
-            restFactory.analytics.adminToday().then(function(resp){
+            restFactory.media.addMedia(file).then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
-                    _data.adminToday=response;
-                    // alertFactory.success(null, resp.message);
-                    deffered.resolve(resp.data);
-                }
-                else{
-                    globalLoader.hide();
-                    // alertFactory.error(null, resp.message);
-                    deffered.reject(resp);
-                }
-            }, function(err){
-                globalLoader.hide();
-                deffered.reject(err);
-            });
-            return deffered.promise;
-        }
-        function annualEarning(){
-            globalLoader.show();
-            var deffered = $q.defer();
-            restFactory.analytics.annualEarning().then(function(resp){
-                if(resp.success){
-                    globalLoader.hide();
-                    _data.annualEarning=response;
-                    // alertFactory.success(null, resp.message);
-                    deffered.resolve(resp.data);
-                }
-                else{
-                    globalLoader.hide();
-                    // alertFactory.error(null, resp.message);
-                    deffered.reject(resp);
-                }
-            }, function(err){
-                globalLoader.hide();
-                deffered.reject(err);
-            });
-            return deffered.promise;
-        }
-        function earningByCity(){
-            globalLoader.show();
-            var deffered = $q.defer();
-            restFactory.analytics.earningByCity().then(function(resp){
-                if(resp.success){
-                    globalLoader.hide();
-                    _data.earningByCity=response;
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
@@ -90,7 +39,25 @@
             return deffered.promise;
         }
 
-
+        function getMedia(){
+            globalLoader.show();
+            var deffered = $q.defer();
+            restFactory.media.getMedia().then(function(resp){
+                if(resp.success){
+                    globalLoader.hide();
+                    // alertFactory.success(null, resp.message);
+                    deffered.resolve(resp.data);
+                }
+                else{
+                    globalLoader.hide();
+                    // alertFactory.error(null, resp.message);
+                    deffered.reject(resp);
+                }
+            }, function(err){
+                globalLoader.hide();
+                deffered.reject(err);
+            });
+            return deffered.promise;
+        }
     }
-
 }());
