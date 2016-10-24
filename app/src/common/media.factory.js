@@ -62,8 +62,8 @@
             restFactory.media.getMedia(queryParams).then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
-                    if(type==='Stickers') _data.stickers=resp.data;
-                    else if(type==='Fonts') _data.fonts=resp.data;
+                    if(type==='stickers') _data.stickers=resp.data;
+                    else if(type==='fonts') _data.fonts=resp.data;
                     else if(type==='none') _data.allMedia=resp.data;
 
                     // alertFactory.success(null, resp.message);
@@ -89,8 +89,8 @@
                     globalLoader.hide();
 
                     if(type=="none") _data.allMedia.splice(findIndexById(id, _data.allMedia), 1);
-                    else if(type=="Stickers") _data.stickers.splice(findIndexById(id, _data.stickers), 1);
-                    else if(type=="Fonts") _data.fonts.splice(findIndexById(id, _data.fonts), 1);
+                    else if(type=="stickers") _data.stickers.splice(findIndexById(id, _data.stickers), 1);
+                    else if(type=="fonts") _data.fonts.splice(findIndexById(id, _data.fonts), 1);
 
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);

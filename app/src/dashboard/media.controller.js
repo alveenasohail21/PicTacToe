@@ -18,8 +18,9 @@
         var vm = this;
         vm.newMedia={};
         vm.newMedia.theme="Standard";
-        vm.newMedia.type="Stickers";
+        vm.newMedia.type="stickers";
         vm.mediaData=MediaFactory._data;
+        console.log(vm.mediaData);
 
         //method assignment
         vm.submitMedia=submitMedia;
@@ -30,7 +31,7 @@
             MediaFactory.addMedia(vm.newMedia);
         }
         function deleteMedia(id, type) {
-            MediaFactory.deleteMedia(id, type);
+            MediaFactory.deleteMedia(id, type || 'none');
         }
 
     }

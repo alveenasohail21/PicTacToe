@@ -118,7 +118,7 @@
                     },
                     resolve: {
                         r_stickers: function ($stateParams, MediaFactory) {
-                            return MediaFactory.getMedia(null, null, false, 'Stickers');
+                            return MediaFactory.getMedia(null, null, false, 'stickers');
                         }
                     }
                 }
@@ -133,11 +133,9 @@
                     },
                     resolve: {
                         r_fonts: function ($stateParams, MediaFactory) {
-                            return MediaFactory.getMedia(null, null, false, 'Fonts');
+                            return MediaFactory.getMedia(null, null, false, 'fonts');
                         }
                     }
-
-
                 }
             )
             .state('Dashboard.AllMedia', {

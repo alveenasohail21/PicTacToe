@@ -9,6 +9,7 @@
                 <table id="media-list" class="display responsive nowrap table table-striped" cellspacing="0" width="100%">
                     <thead>
                     <tr>
+                        <th>Image</th>
                         <th>Name</th>
                         <th>Theme</th>
                         <th>Type</th>
@@ -19,11 +20,13 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="m in vm.mediaData.stickers">
+                        <td><img ng-src="{{m.url}}" alt=""></td>
                         <td>{{m.name}}</td>
                         <td>{{m.theme}}</td>
                         <td>{{m.type}}</td>
                         <td>{{m.extension}}</td>
                         <td>{{m.created_at}}</td>
+                        <!--<i class="fa fa-times" aria-hidden="true"></i>-->
                         <td><button class="btn btn-danger btn-sm" ng-click="vm.deleteMedia(m._id, m.type)">Delete</button></td>
                     </tr>
                     </tbody>

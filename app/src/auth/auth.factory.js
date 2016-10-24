@@ -24,7 +24,6 @@
       var defer = $q.defer();
       $auth.login(user)
           .then(function(resp){
-            console.log("test"+resp);
             if(resp.data.success){
               // remove the token saved by $auth, as its throwing 'Uncaught Syntax error'
               $auth.removeToken();
