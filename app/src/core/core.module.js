@@ -14,6 +14,7 @@
     'ngAnimate',
     'ngStorage',
     'ngMessages',
+    'ngFileUpload',
     'satellizer'
   ]);
 
