@@ -30,6 +30,7 @@
 
         // method definitions
         function init() {
+            console.log(moment().month(1).format('MMM'));
             vm.allMediaPages=initPagination(vm.mediaData.allMedia.count);
             vm.stickersPages=initPagination(vm.mediaData.stickers.count);
             vm.fontsPages=initPagination(vm.mediaData.fonts.count);

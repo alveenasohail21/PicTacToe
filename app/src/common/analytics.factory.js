@@ -100,7 +100,9 @@
             var tempSeries=[];
             for(var i in _data[rawObjectSelector]){
                 var dataObject=_data[rawObjectSelector][i];
-                chartistData.labels.push(dataObject[selector]);
+                var label=dataObject[selector];
+                if(selector=='month') label=moment().month(label-1).format('MMM');
+                chartistData.labels.push(label);
                 tempSeries.push(dataObject.total);
             }
             chartistData.series.push(tempSeries);
