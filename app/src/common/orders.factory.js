@@ -25,7 +25,7 @@
         const DefaultSearchParams={
             skip: 1,
             limit: 10,
-            value: 1
+            value: undefined
         };
         /* Return Functions */
         return {
@@ -49,6 +49,7 @@
             restFactory.orders.getAllOrders(queryParams).then(function(resp){
                 if(resp.success){
                     _data.orders=resp.data;
+                    console.log(resp.data);
 
                     globalLoader.hide();
                     // alertFactory.success(null, resp.message);
@@ -96,6 +97,7 @@
             restFactory.orders.getOrderDetails(id).then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
+
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
@@ -122,7 +124,7 @@
             restFactory.orders.orderSearch(queryParams).then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
-                    _data.orders.users=resp.data.orders;
+                    _data.orders.orders=resp.data.orders;
 
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data.orders);
@@ -149,7 +151,7 @@
             restFactory.orders.orderSearchByTime(queryParams).then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
-                    _data.orders.users=resp.data;
+                    _data.orders.orders=resp.data;
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }

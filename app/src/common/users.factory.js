@@ -27,7 +27,7 @@
             const DefaultSearchParams={
                 skip: 1,
                 limit: 10,
-                value: 'test'
+                value: undefined
             };
             return {
                 _data: _data,

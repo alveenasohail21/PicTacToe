@@ -17,6 +17,7 @@
         //variable assignment
         var vm = this;
         vm.orderData=OrdersFactory._data;
+        console.log(vm.orderData);
 
         vm.orderCount=vm.orderData.orders.totalcount;
         vm.ordersStatus=r_orders_status;

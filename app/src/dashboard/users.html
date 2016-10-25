@@ -7,10 +7,10 @@
                 <div class="search-form">
                     <form name="searchUserForm" class="row">
                         <div class="col col-sm-8">
-                            <input type="text" name="userField" placeholder="Search User.." class="form-control" ng-model="userField" required>
+                            <input type="text" name="userField" placeholder="Search User.." class="form-control" ng-model="userField" >
                         </div>
                         <div class="col col-sm-4">
-                            <button class="btn btn-info" ng-disabled="searchUserForm.userField.$invalid" ng-click="vm.findUser(userField)"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            <button class="btn btn-info"  ng-click="vm.findUser(userField)"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
                     </form>
                     <form name="searchUserByTimeForm" class="row">
