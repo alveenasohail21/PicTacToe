@@ -25,12 +25,15 @@
         vm.findOrder=findOrder;
         vm.findOrderByTime=findOrderByTime;
         vm.updateOrder=updateOrder;
+        vm.getPages=getPages;
 
         //method definitions
+        function init(){
+            vm.orderPages=initPagination(vm.orderCount);
+        }
         function findOrder(value) {
             OrdersFactory.orderSearch(value).then(function (response) {
                 vm.orders=response.orders;
-                console.log("Orders Search API", response);
             });
         }
 
@@ -47,13 +50,26 @@
         function getOrderDetails(id) {
             OrdersFactory.getOrderDetails(id).then(function (response) {
                 vm.orderDetails=response;
-                console.log(vm.orderDetails);
             })
         }
 
         function formatDate(rawDate) {
             return moment(rawDate).format("YYYY-MM-DD")
         }
+
+        function getPages(from) {
+            OrdersFactory.getAllOrders(from, null);
+        }
+
+        function initPagination(order_count){
+            var count=Math.ceil(order_count/10);
+            var pages=[];
+            for(var i=0;i<count;i++){
+                pages[i]=i;
+            }
+            return pages;
+        }
+        init();
     }
 
 }());

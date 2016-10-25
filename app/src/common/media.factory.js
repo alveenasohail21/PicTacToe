@@ -86,9 +86,9 @@
                 if(resp.success){
                     globalLoader.hide();
 
-                    if(type=="none") _data.allMedia.splice(findIndexById(id, _data.allMedia), 1);
-                    else if(type=="stickers") _data.stickers.splice(findIndexById(id, _data.stickers), 1);
-                    else if(type=="fonts") _data.fonts.splice(findIndexById(id, _data.fonts), 1);
+                    if(type=="none") _data.allMedia.media.splice(findIndexById(id, _data.allMedia.media), 1);
+                    else if(type=="stickers") _data.stickers.media.splice(findIndexById(id, _data.stickers.media), 1);
+                    else if(type=="fonts") _data.fonts.media.splice(findIndexById(id, _data.fonts.media), 1);
 
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);

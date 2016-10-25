@@ -20,16 +20,20 @@
         vm.newMedia.theme="Standard";
         vm.newMedia.type="stickers";
         vm.mediaData=MediaFactory._data;
-         var allMediaPages=Math.ceil(vm.mediaData.allMedia.count/10);
-        vm.allMediaPages=new Array(allMediaPages);
-        console.log(vm.allMediaPages, vm.stickersPages, vm.fontsPages);
-        console.log(vm.mediaData);
+
         //method assignment
         vm.submitMedia=submitMedia;
         vm.deleteMedia=deleteMedia;
         vm.getPages=getPages;
 
         // method definitions
+        function init() {
+            vm.allMediaPages=initPagination(vm.mediaData.allMedia.count);
+            vm.stickersPages=initPagination(vm.mediaData.stickers.count);
+            vm.fontsPages=initPagination(vm.mediaData.fonts.count);
+            console.log(vm.mediaData)
+        }
+
         function submitMedia() {
             MediaFactory.addMedia(vm.newMedia);
         }
@@ -37,12 +41,17 @@
             MediaFactory.deleteMedia(id, type || 'none');
         }
         function getPages(from) {
-
             MediaFactory.getMedia(from*10, null, true, 'none');
         }
-        for(var i=0;i<allMediaPages;i++){
-            vm.allMediaPages[i]=i;
+        function initPagination(mediaCount){
+            var count=Math.ceil(mediaCount/10);
+            var pages=[];
+            for(var i=0;i<count;i++){
+                pages[i]=i;
+            }
+            return pages;
         }
+        init()
     }
 
 }());
