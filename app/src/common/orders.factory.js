@@ -123,7 +123,7 @@
                 if(resp.success){
                     globalLoader.hide();
                     _data.orders.orders=resp.data.orders;
-
+                    _data.orders.count=resp.data.count;
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data.orders);
                 }

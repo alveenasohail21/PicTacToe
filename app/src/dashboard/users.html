@@ -7,21 +7,21 @@
                 <div class="search-form">
                     <form name="searchUserForm" class="row">
                         <div class="col col-sm-8">
-                            <input type="text" name="userField" placeholder="Search User.." class="form-control" ng-model="userField" >
+                            <input type="text" name="userField" placeholder="Search User.." class="form-control" ng-model="vm.userField" >
                         </div>
                         <div class="col col-sm-4">
-                            <button class="btn btn-info"  ng-click="vm.findUser(userField)"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            <button class="btn btn-info"  ng-click="vm.findUser(vm.userField)"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
                     </form>
                     <form name="searchUserByTimeForm" class="row">
                         <div class="col col-sm-4">
-                            <input type="date" class="form-control" ng-model="fromField" required>
+                            <input type="date" class="form-control" ng-model="vm.fromField" required>
                         </div>
                         <div class="col col-sm-4">
-                            <input type="date" class="form-control" ng-model="toField" required>
+                            <input type="date" class="form-control" ng-model="vm.toField" required>
                         </div>
                         <div class="col col-sm-4">
-                            <button class="btn btn-info" ng-disabled="searchUserByTimeForm.$invalid" ng-click="vm.findUserByTime(fromField, toField)"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            <button class="btn btn-info" ng-disabled="searchUserByTimeForm.$invalid" ng-click="vm.findUserByTime(vm.fromField, vm.toField)"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
                     </form>
                 </div>

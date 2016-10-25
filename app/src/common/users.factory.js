@@ -66,6 +66,7 @@
             function userSearch(value, skip, limit){
                 //search user by any field
                 globalLoader.show();
+                console.log(value, skip);
                 var queryParams={
                     skip: skip || DefaultSearchParams.skip,
                     limit: limit || DefaultSearchParams.limit,
@@ -75,8 +76,13 @@
                 restFactory.users.userSearch(queryParams).then(function(resp){
                     if(resp.success){
                         globalLoader.hide();
-                        console.log(resp.data);
+                        // console.log("before edit: ", _data.users);
+
                         _data.users.users=resp.data.users;
+                        _data.users.count=resp.data.count;
+                        // console.log("after edit: ", _data.users);
+
+
                         // alertFactory.success(null, resp.message);
                         deffered.resolve(resp.data);
                     }
@@ -98,7 +104,6 @@
                 var deffered = $q.defer();
                 restFactory.users.updateUser(id, value).then(function(resp){
                     if(resp.success){
-                        console.log(resp);
                         globalLoader.hide();
                         // alertFactory.success(null, resp.message);
                         deffered.resolve(resp.data);
@@ -126,9 +131,7 @@
                     if(resp.success){
                         globalLoader.hide();
                         // alertFactory.success(null, resp.message);
-
                         _data.users.users=resp.data;
-                        deffered.resolve(resp.data);
                     }
                     else{
                         globalLoader.hide();

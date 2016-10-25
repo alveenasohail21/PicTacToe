@@ -30,10 +30,10 @@
 
         // method definitions
         function init() {
-            console.log(moment().month(1).format('MMM'));
             vm.allMediaPages=initPagination(vm.mediaData.allMedia.count);
             vm.stickersPages=initPagination(vm.mediaData.stickers.count);
             vm.fontsPages=initPagination(vm.mediaData.fonts.count);
+            console.log(vm.mediaData);
         }
         function switchPattern() {
             if(vm.newMedia.type=='fonts') {
@@ -52,6 +52,7 @@
             MediaFactory.deleteMedia(id, type || 'none');
         }
         function getPages(from) {
+
             MediaFactory.getMedia(from*10, null, true, 'none');
         }
         function initPagination(mediaCount){

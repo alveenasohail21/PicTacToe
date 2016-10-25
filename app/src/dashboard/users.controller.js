@@ -18,9 +18,6 @@
         //variable assignment
         var vm = this;
         vm.userData=UsersFactory._data;
-        vm.userCount=vm.userData.users.totalcount;
-
-
         //method assignment
         vm.findUser=findUser;
         vm.findUserByTime=findUserByTime;
@@ -28,15 +25,22 @@
         vm.getPages=getPages;
 
         function findUser(value) {
-            UsersFactory.userSearch(value);
+            vm.toField="";
+            vm.fromField="";
+            UsersFactory.userSearch(value).then(function (response) {
+                vm.userPages=initPagination();
+            });
         }
 
         function findUserByTime(from, to) {
-            UsersFactory.userSearchByTime(formatDate(from), formatDate(to));
+            vm.userField="";
+            UsersFactory.userSearchByTime(formatDate(from), formatDate(to)).then(function (response) {
+                vm.userPages=initPagination();
+            });
         }
 
         function updateUser(id, value) {
-            UsersFactory.updateUser(id.toString(), value);
+            UsersFactory.updateUser(id.toString(), value)
         }
 
         function formatDate(rawDate) {
@@ -44,15 +48,21 @@
         }
 
         function init() {
-            vm.userPages=initPagination(vm.userCount);
+            vm.userPages=initPagination();
         }
 
         function getPages(from) {
-            UsersFactory.getAllusers(from+1, null);
+            if(vm.userField){
+                UsersFactory.userSearch(vm.userField, from+1);
+            }
+            else{
+                UsersFactory.getAllusers(from+1, null);
+            }
         }
 
-        function initPagination(user_count){
-            var count=Math.ceil(user_count/10);
+        function initPagination(){
+            console.log(vm.userData.users);
+            var count=Math.ceil(vm.userData.users.count/10);
             var pages=[];
             for(var i=0;i<count;i++){
                 pages[i]=i;

@@ -17,9 +17,6 @@
         //variable assignment
         var vm = this;
         vm.orderData=OrdersFactory._data;
-        console.log(vm.orderData);
-
-        vm.orderCount=vm.orderData.orders.totalcount;
         vm.ordersStatus=r_orders_status;
 
         //method assignment
@@ -33,12 +30,20 @@
         function init(){
             vm.orderPages=initPagination(vm.orderCount);
         }
-        function findOrder(value) {
-            OrdersFactory.orderSearch(value);
+        function findOrder() {
+            vm.toField="";
+            vm.fromField="";
+            OrdersFactory.orderSearch(vm.orderField).then(function (response) {
+                vm.orderPages=initPagination();
+            });
+
         }
 
         function findOrderByTime(from, to) {
-            OrdersFactory.orderSearchByTime(formatDate(from), formatDate(to));
+            vm.orderField="";
+            OrdersFactory.orderSearchByTime(formatDate(from), formatDate(to)).then(function (response) {
+                vm.orderPages=initPagination();
+            });
         }
 
         function updateOrder(id, value) {
@@ -56,11 +61,16 @@
         }
 
         function getPages(from) {
-            OrdersFactory.getAllOrders(from+1, null);
+            if(vm.orderField){
+                OrdersFactory.orderSearch(vm.orderField, from+1);
+            }
+            else{
+                OrdersFactory.getAllOrders(from+1, null);
+            }
         }
 
-        function initPagination(order_count){
-            var count=Math.ceil(order_count/10);
+        function initPagination(){
+            var count=Math.ceil(OrdersFactory._data.orders.count/10);
             var pages=[];
             for(var i=0;i<count;i++){
                 pages[i]=i;
