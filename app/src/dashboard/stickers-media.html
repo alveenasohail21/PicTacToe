@@ -19,7 +19,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="m in vm.mediaData.stickers">
+                    <tr ng-repeat="m in vm.mediaData.stickers.media">
                         <td><img ng-src="{{m.url}}" alt=""></td>
                         <td>{{m.name}}</td>
                         <td>{{m.theme}}</td>
@@ -31,6 +31,9 @@
                     </tr>
                     </tbody>
                 </table>
+
+                <div></div>
+
             </div>
         </div>
     </div>

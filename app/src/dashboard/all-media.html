@@ -18,7 +18,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="m in vm.mediaData.allMedia">
+                    <tr ng-repeat="m in vm.mediaData.allMedia.media">
                         <td>{{m.name}}</td>
                         <td>{{m.theme}}</td>
                         <td>{{m.type}}</td>
@@ -28,6 +28,9 @@
                     </tr>
                     </tbody>
                 </table>
+                <ul>
+                    <li ng-repeat="i in vm.allMediaPages"><span><a class="cursor-pointer" ng-click="vm.getPages($index)">{{$index+1}}</a></span></li>
+                </ul>
             </div>
         </div>
     </div>

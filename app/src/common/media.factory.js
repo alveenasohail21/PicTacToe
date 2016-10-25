@@ -41,7 +41,6 @@
                 },
                 data :  media
             }).then(function(resp){
-                console.log("response :: ",resp);
                 if(resp.data.code == 0){
                     globalLoader.hide();
                 }else {
@@ -65,7 +64,6 @@
                     if(type==='stickers') _data.stickers=resp.data;
                     else if(type==='fonts') _data.fonts=resp.data;
                     else if(type==='none') _data.allMedia=resp.data;
-
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }

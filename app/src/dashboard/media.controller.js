@@ -20,11 +20,14 @@
         vm.newMedia.theme="Standard";
         vm.newMedia.type="stickers";
         vm.mediaData=MediaFactory._data;
+         var allMediaPages=Math.ceil(vm.mediaData.allMedia.count/10);
+        vm.allMediaPages=new Array(allMediaPages);
+        console.log(vm.allMediaPages, vm.stickersPages, vm.fontsPages);
         console.log(vm.mediaData);
-
         //method assignment
         vm.submitMedia=submitMedia;
         vm.deleteMedia=deleteMedia;
+        vm.getPages=getPages;
 
         // method definitions
         function submitMedia() {
@@ -33,7 +36,13 @@
         function deleteMedia(id, type) {
             MediaFactory.deleteMedia(id, type || 'none');
         }
+        function getPages(from) {
 
+            MediaFactory.getMedia(from*10, null, true, 'none');
+        }
+        for(var i=0;i<allMediaPages;i++){
+            vm.allMediaPages[i]=i;
+        }
     }
 
 }());
