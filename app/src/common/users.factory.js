@@ -75,6 +75,8 @@
                 restFactory.users.userSearch(queryParams).then(function(resp){
                     if(resp.success){
                         globalLoader.hide();
+                        console.log(resp.data);
+                        _data.users.users=resp.data.users;
                         // alertFactory.success(null, resp.message);
                         deffered.resolve(resp.data);
                     }
@@ -124,6 +126,8 @@
                     if(resp.success){
                         globalLoader.hide();
                         // alertFactory.success(null, resp.message);
+
+                        _data.users.users=resp.data;
                         deffered.resolve(resp.data);
                     }
                     else{

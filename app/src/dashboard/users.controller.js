@@ -19,8 +19,7 @@
         var vm = this;
         vm.userData=UsersFactory._data;
         vm.userCount=vm.userData.users.totalcount;
-        // vm.users=vm.userData.users.users;
-        console.log(vm.userData);
+
 
         //method assignment
         vm.findUser=findUser;
@@ -29,16 +28,11 @@
         vm.getPages=getPages;
 
         function findUser(value) {
-            UsersFactory.userSearch(value).then(function (response) {
-                vm.users=response.users;
-                console.log("User Search API", response);
-            });
+            UsersFactory.userSearch(value);
         }
 
         function findUserByTime(from, to) {
-            UsersFactory.userSearchByTime(formatDate(from), formatDate(to)).then(function (response) {
-                vm.users=response;
-            });
+            UsersFactory.userSearchByTime(formatDate(from), formatDate(to));
         }
 
         function updateUser(id, value) {
@@ -50,14 +44,11 @@
         }
 
         function init() {
-            console.log(vm.userCount);
             vm.userPages=initPagination(vm.userCount);
         }
 
         function getPages(from) {
             UsersFactory.getAllusers(from+1, null);
-            console.log(vm.userData.users.users);
-            // vm.users=vm.userData.users.users;
         }
 
         function initPagination(user_count){

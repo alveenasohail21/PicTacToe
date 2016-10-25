@@ -54,8 +54,8 @@
                 </div>
 
                 <div class="orders-list">
-                    <div ng-if="vm.orders.length===0"><h2 class="text-center">No Orders Found</h2></div>
-                    <div ng-if="vm.orders.length>0">
+                    <div ng-if="vm.orderData.orders.users.length===0"><h2 class="text-center">No Orders Found</h2></div>
+                    <div ng-if="vm.orderData.orders.users.length>0">
                         <h2 class="text-center">
                             Orders
                         </h2>
@@ -75,7 +75,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="order in vm.orders">
+                            <tr ng-repeat="order in vm.orderData.orders.users">
                                 <td><a ui-sref="Dashboard.OrderDetails({id: order.id})">{{order.id}}</a></td>
                                 <td>{{order.action}}</td>
                                 <td>{{order.billing_id}}</td>

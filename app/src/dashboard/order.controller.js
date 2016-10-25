@@ -13,11 +13,12 @@
         .controller('OrdersCtrl', OrdersCtrl);
 
     /* @ngInject */
-    function OrdersCtrl(r_orders, r_orders_status, OrdersFactory){
+    function OrdersCtrl(r_orders_status, OrdersFactory){
         //variable assignment
         var vm = this;
-        vm.orderCount=r_orders.totalcount;
-        vm.orders=r_orders.users;
+        vm.orderData=OrdersFactory._data;
+
+        vm.orderCount=vm.orderData.orders.totalcount;
         vm.ordersStatus=r_orders_status;
 
         //method assignment
@@ -32,15 +33,11 @@
             vm.orderPages=initPagination(vm.orderCount);
         }
         function findOrder(value) {
-            OrdersFactory.orderSearch(value).then(function (response) {
-                vm.orders=response.orders;
-            });
+            OrdersFactory.orderSearch(value);
         }
 
         function findOrderByTime(from, to) {
-            OrdersFactory.orderSearchByTime(formatDate(from), formatDate(to)).then(function (response) {
-                vm.orders=response;
-            });
+            OrdersFactory.orderSearchByTime(formatDate(from), formatDate(to));
         }
 
         function updateOrder(id, value) {
@@ -58,7 +55,7 @@
         }
 
         function getPages(from) {
-            OrdersFactory.getAllOrders(from, null);
+            OrdersFactory.getAllOrders(from+1, null);
         }
 
         function initPagination(order_count){

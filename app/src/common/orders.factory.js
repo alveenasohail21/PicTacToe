@@ -11,6 +11,9 @@
         .factory('OrdersFactory', OrdersFactory);
 
     function OrdersFactory($q, restFactory){
+        var _data={
+            orders: []
+        };
         const DefaultQueryParams = {
             from: 1,
             size: 10
@@ -26,6 +29,7 @@
         };
         /* Return Functions */
         return {
+            _data: _data,
             getAllOrders: getAllOrders,
             getOrderDetails: getOrderDetails,
             getOrdersStatus: getOrdersStatus,
@@ -35,15 +39,17 @@
         };
         /* Define Fuctions */
 
-        function getAllOrders(from, size){
+        function getAllOrders(skip, limit){
             globalLoader.show();
             var queryParams={
-                from: from || DefaultTimeParams.from,
-                size: size || DefaultTimeParams.size
+                skip: skip || DefaultSearchParams.skip,
+                limit: limit || DefaultSearchParams.limit
             };
             var deffered = $q.defer();
             restFactory.orders.getAllOrders(queryParams).then(function(resp){
                 if(resp.success){
+                    _data.orders=resp.data;
+
                     globalLoader.hide();
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
@@ -116,8 +122,10 @@
             restFactory.orders.orderSearch(queryParams).then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
+                    _data.orders.users=resp.data.orders;
+
                     // alertFactory.success(null, resp.message);
-                    deffered.resolve(resp.data);
+                    deffered.resolve(resp.data.orders);
                 }
                 else{
                     globalLoader.hide();
@@ -141,6 +149,7 @@
             restFactory.orders.orderSearchByTime(queryParams).then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
+                    _data.orders.users=resp.data;
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
@@ -177,7 +186,5 @@
             });
             return deffered.promise;
         }
-
     }
-
 }());
