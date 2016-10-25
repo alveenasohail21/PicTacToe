@@ -33,7 +33,6 @@
             vm.allMediaPages=initPagination(vm.mediaData.allMedia.count);
             vm.stickersPages=initPagination(vm.mediaData.stickers.count);
             vm.fontsPages=initPagination(vm.mediaData.fonts.count);
-            console.log(vm.mediaData)
         }
         function switchPattern() {
             if(vm.newMedia.type=='fonts') {

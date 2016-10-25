@@ -49,8 +49,6 @@
             restFactory.orders.getAllOrders(queryParams).then(function(resp){
                 if(resp.success){
                     _data.orders=resp.data;
-                    console.log(resp.data);
-
                     globalLoader.hide();
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
