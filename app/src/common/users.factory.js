@@ -13,6 +13,9 @@
         function UsersFactory($q, restFactory){
             /* Return Functions */
 
+            var _data={
+                users: []
+            };
             const DefaultQueryParams = {
                 from: 1,
                 size: 10
@@ -27,22 +30,24 @@
                 value: 'test'
             };
             return {
+                _data: _data,
                 getAllusers: getAllusers,
                 userSearch: userSearch,
                 updateUser: updateUser,
                 userSearchByTime: userSearchByTime
             };
 
-            function getAllusers(from, to){
+            function getAllusers(skip, limit){
                 globalLoader.show();
                 var queryParams={
-                    from: from || DefaultSearchParams.from,
-                    to: to || DefaultSearchParams.to
+                    skip: skip || DefaultSearchParams.skip,
+                    limit: limit || DefaultSearchParams.limit
                 };
                 var deffered = $q.defer();
                 restFactory.users.getAllusers(queryParams).then(function(resp){
                     if(resp.success){
                         globalLoader.hide();
+                        _data.users=resp.data;
                         // alertFactory.success(null, resp.message);
                         deffered.resolve(resp.data);
                     }

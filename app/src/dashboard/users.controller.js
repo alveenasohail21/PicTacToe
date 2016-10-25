@@ -13,12 +13,14 @@
         .controller('UsersCtrl', UsersCtrl);
 
     /* @ngInject */
-    function UsersCtrl(r_users, $scope, UsersFactory){
+    function UsersCtrl(UsersFactory){
 
         //variable assignment
         var vm = this;
-        vm.userCount=r_users.totalcount;
-        vm.users=r_users.users;
+        vm.userData=UsersFactory._data;
+        vm.userCount=vm.userData.users.totalcount;
+        // vm.users=vm.userData.users.users;
+        console.log(vm.userData);
 
         //method assignment
         vm.findUser=findUser;
@@ -48,11 +50,14 @@
         }
 
         function init() {
+            console.log(vm.userCount);
             vm.userPages=initPagination(vm.userCount);
         }
 
         function getPages(from) {
-            UsersFactory.getAllusers(from, null);
+            UsersFactory.getAllusers(from+1, null);
+            console.log(vm.userData.users.users);
+            // vm.users=vm.userData.users.users;
         }
 
         function initPagination(user_count){
