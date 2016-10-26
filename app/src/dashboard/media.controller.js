@@ -47,7 +47,13 @@
         }
 
         function submitMedia() {
-            MediaFactory.addMedia(vm.newMedia);
+            vm.newMedia.theme='Standard';
+            MediaFactory.addMedia(vm.newMedia).then(function (response) {
+                vm.newMedia.type='stickers';
+                vm.newMedia.name='';
+                vm.newMedia.theme='Standard';
+                vm.newMedia.media=undefined;
+            });
         }
 
         function deleteMedia(id, type) {

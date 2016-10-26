@@ -34,6 +34,8 @@
 
         function addMedia(media){
             globalLoader.show();
+            var deffered = $q.defer();
+
             Upload.upload({
                 url : 'http://localhost:8000/admin/media',
                 headers: {
@@ -44,12 +46,15 @@
 
                 if(resp.data.code == 0){
                     alertFactory.error(null, resp.data.message);
+                    deffered.reject(resp.data);
                     globalLoader.hide();
                 }else {
                     alertFactory.success(null, resp.data.message);
+                    deffered.resolve(resp.data);
                     globalLoader.hide();
                 }
             });
+            return deffered.promise;
         }
 
         function getMedia(from, size, all, type){

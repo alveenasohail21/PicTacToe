@@ -1,6 +1,11 @@
 /* Main Header */
 .main-header{
   height: 80px;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 10000;
   background-color: white;
   .navbar{
     margin-bottom: 0;
@@ -15,6 +20,11 @@
         .navbar-left {
           height: 100%;
           -webkit-padding-start: 0;
+          img{
+            margin-top: -10px;
+            width: 200px;
+            height: auto;
+          }
           li {
             display: initial;
             margin-left: 3px;

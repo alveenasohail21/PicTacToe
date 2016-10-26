@@ -70,12 +70,12 @@
                             </tr>
                             </tbody>
                         </table>
-                        <ul>
-                            <li ng-repeat="i in vm.userPages"><span><a class="cursor-pointer" ng-click="vm.getPages($index)">{{$index+1}}</a></span></li>
-                        </ul>
-
+                        <div class="text-center">
+                            <ul class="pagination pagination-lg">
+                                <li ng-repeat="i in vm.userPages"><span><a class="cursor-pointer" ng-click="vm.getPages($index)">{{$index+1}}</a></span></li>
+                            </ul>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
