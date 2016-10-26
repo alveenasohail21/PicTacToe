@@ -33,8 +33,8 @@
             vm.allMediaPages=initPagination(vm.mediaData.allMedia.count);
             vm.stickersPages=initPagination(vm.mediaData.stickers.count);
             vm.fontsPages=initPagination(vm.mediaData.fonts.count);
-            console.log(vm.mediaData);
         }
+
         function switchPattern() {
             if(vm.newMedia.type=='fonts') {
                 vm.newMedia.media=undefined;
@@ -45,15 +45,21 @@
                 vm.uploadPattern='image/*';
             }
         }
+
         function submitMedia() {
             MediaFactory.addMedia(vm.newMedia);
         }
+
         function deleteMedia(id, type) {
             MediaFactory.deleteMedia(id, type || 'none');
         }
+
         function getPages(from, type) {
-            MediaFactory.getMedia(from*10, null, true, type);
+            if(type=='stickers') MediaFactory.getMedia(from*10, null, false, type);
+            else if (type=='fonts') MediaFactory.getMedia(from*10, null, false, type);
+            else if (type=='none') MediaFactory.getMedia(from*10, null, true, type);
         }
+
         function initPagination(mediaCount){
             var count=Math.ceil(mediaCount/10);
             var pages=[];

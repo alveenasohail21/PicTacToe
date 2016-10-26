@@ -67,7 +67,7 @@
                     if(type==='stickers') _data.stickers=resp.data;
                     else if(type==='fonts') _data.fonts=resp.data;
                     else if(type==='none') _data.allMedia=resp.data;
-                    alertFactory.success(null, resp.message);
+                    // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
@@ -93,7 +93,7 @@
                     else if(type=="stickers") _data.stickers.media.splice(findIndexById(id, _data.stickers.media), 1);
                     else if(type=="fonts") _data.fonts.media.splice(findIndexById(id, _data.fonts.media), 1);
 
-                    alertFactory.success(null, resp.message);
+                    // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
