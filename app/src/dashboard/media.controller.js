@@ -51,9 +51,8 @@
         function deleteMedia(id, type) {
             MediaFactory.deleteMedia(id, type || 'none');
         }
-        function getPages(from) {
-
-            MediaFactory.getMedia(from*10, null, true, 'none');
+        function getPages(from, type) {
+            MediaFactory.getMedia(from*10, null, true, type);
         }
         function initPagination(mediaCount){
             var count=Math.ceil(mediaCount/10);
