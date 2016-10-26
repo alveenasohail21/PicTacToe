@@ -35,7 +35,7 @@
                 if(resp.success){
                     globalLoader.hide();
                     _data.adminToday=resp.data;
-                    alertFactory.success(null, resp.message);
+                    // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
@@ -57,7 +57,7 @@
                     globalLoader.hide();
                     _data.annualEarning=resp.data;
 
-                    alertFactory.success(null, resp.message);
+                    // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
@@ -78,7 +78,7 @@
                 if(resp.success){
                     globalLoader.hide();
                     _data.earningByCity=resp.data;
-                    alertFactory.success(null, resp.message);
+                    // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
