@@ -4,15 +4,17 @@
         <!-- /#page-content-wrapper -->
 
         <div id="page-content-wrapper">
-            <div class="container-fluid orders">
+            <div class="container-fluid orders text-center">
                 <h2 class="text-center">Analytics</h2>
                 <h3>Stats For Today</h3>
                 <p>Users Joined: {{vm.adminToday.user}}</p>
                 <p>Orders Created: {{vm.adminToday.orders}}</p>
                 <h3>Annual Earning</h3>
-                <chartist-directive chart-method='lineChart' chart-element="annual-earning" chart-data="vm.annualEarning"></chartist-directive>
-                <h3>Earning By City</h3>
-                <chartist-directive chart-method='barChart' chart-element="earning-by-city" chart-data="vm.earningByCity"></chartist-directive>
+                <div >
+                    <chartist-directive chart-method='lineChart' chart-element="annual-earning" chart-data="vm.annualEarning"></chartist-directive>
+                    <h3>Earning By City</h3>
+                    <chartist-directive chart-method='barChart' chart-element="earning-by-city" chart-data="vm.earningByCity"></chartist-directive>
+                </div>
             </div>
         </div>
     </div>

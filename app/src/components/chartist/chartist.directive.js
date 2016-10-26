@@ -36,6 +36,10 @@
         function link(scope, elem, attrs){
             //Variable Assignment
             var chartElement='.'+scope.chartElement;
+            var options = {
+                width: '500px',
+                height: '300px'
+            };
 
             //Method Assignment
             scope.lineChart = lineChart;
@@ -50,10 +54,10 @@
                 }, 100);
             }
             function lineChart(){
-                chartistFactory.lineChart(chartElement, scope.chartData);
+                chartistFactory.lineChart(chartElement, scope.chartData, options);
             }
             function barChart(){
-                chartistFactory.barChart(chartElement, scope.chartData);
+                chartistFactory.barChart(chartElement, scope.chartData, options);
             }
             init();
         }

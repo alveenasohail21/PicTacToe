@@ -22,10 +22,10 @@
 
         /* Define Methods */
         function lineChart(element, data, options) {
-            new Chartist.Line(element, data);
+            new Chartist.Line(element, data, options);
         }
         function barChart(element, data, options) {
-            new Chartist.Bar(element, data);
+            new Chartist.Bar(element, data, options);
         }
     }
 
