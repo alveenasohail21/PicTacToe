@@ -42,6 +42,7 @@
             }
             defer.resolve(resp);
           }, function(err){
+            alertFactory.error(null,"Incorrect Credentials");
             globalLoader.hide();
             defer.reject(err);
           });
