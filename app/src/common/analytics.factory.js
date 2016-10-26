@@ -10,7 +10,7 @@
         .module('app.auth')
         .factory('AnalyticsFactory', AnalyticsFactory);
 
-    function AnalyticsFactory($q, restFactory){
+    function AnalyticsFactory($q, restFactory, alertFactory){
         /* Return Functions */
 
         var _data={
@@ -35,12 +35,12 @@
                 if(resp.success){
                     globalLoader.hide();
                     _data.adminToday=resp.data;
-                    // alertFactory.success(null, resp.message);
+                    alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
                     globalLoader.hide();
-                    // alertFactory.error(null, resp.message);
+                    alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){
@@ -56,12 +56,13 @@
                 if(resp.success){
                     globalLoader.hide();
                     _data.annualEarning=resp.data;
-                    // alertFactory.success(null, resp.message);
+
+                    alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
                     globalLoader.hide();
-                    // alertFactory.error(null, resp.message);
+                    alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){
@@ -77,12 +78,12 @@
                 if(resp.success){
                     globalLoader.hide();
                     _data.earningByCity=resp.data;
-                    // alertFactory.success(null, resp.message);
+                    alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
                     globalLoader.hide();
-                    // alertFactory.error(null, resp.message);
+                    alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){

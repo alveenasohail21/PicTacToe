@@ -10,7 +10,7 @@
         .module('app.auth')
         .factory('MediaFactory', MediaFactory);
 
-    function MediaFactory($q, restFactory, Upload, $localStorage){
+    function MediaFactory($q, restFactory, Upload, $localStorage, alertFactory){
         /* Return Functions */
 
         const DefaultQueryParams = {
@@ -41,9 +41,12 @@
                 },
                 data :  media
             }).then(function(resp){
+
                 if(resp.data.code == 0){
+                    alertFactory.error(null, resp.data.message);
                     globalLoader.hide();
                 }else {
+                    alertFactory.success(null, resp.data.message);
                     globalLoader.hide();
                 }
             });
@@ -64,12 +67,12 @@
                     if(type==='stickers') _data.stickers=resp.data;
                     else if(type==='fonts') _data.fonts=resp.data;
                     else if(type==='none') _data.allMedia=resp.data;
-                    // alertFactory.success(null, resp.message);
+                    alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
                     globalLoader.hide();
-                    // alertFactory.error(null, resp.message);
+                    alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){
@@ -90,12 +93,12 @@
                     else if(type=="stickers") _data.stickers.media.splice(findIndexById(id, _data.stickers.media), 1);
                     else if(type=="fonts") _data.fonts.media.splice(findIndexById(id, _data.fonts.media), 1);
 
-                    // alertFactory.success(null, resp.message);
+                    alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
                     globalLoader.hide();
-                    // alertFactory.error(null, resp.message);
+                    alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){

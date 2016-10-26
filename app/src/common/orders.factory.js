@@ -10,7 +10,7 @@
         .module('app.auth')
         .factory('OrdersFactory', OrdersFactory);
 
-    function OrdersFactory($q, restFactory){
+    function OrdersFactory($q, restFactory, alertFactory){
         var _data={
             orders: []
         };
@@ -55,7 +55,7 @@
                 }
                 else{
                     globalLoader.hide();
-                    // alertFactory.error(null, resp.message);
+                    alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){
@@ -78,7 +78,7 @@
                 }
                 else{
                     globalLoader.hide();
-                    // alertFactory.error(null, resp.message);
+                    alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){
@@ -95,13 +95,12 @@
             restFactory.orders.getOrderDetails(id).then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
-
                     // alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
                     globalLoader.hide();
-                    // alertFactory.error(null, resp.message);
+                    alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){
@@ -124,12 +123,12 @@
                     globalLoader.hide();
                     _data.orders.orders=resp.data.orders;
                     _data.orders.count=resp.data.count;
-                    // alertFactory.success(null, resp.message);
+                    alertFactory.success(null, "Orders Successfully Found");
                     deffered.resolve(resp.data.orders);
                 }
                 else{
                     globalLoader.hide();
-                    // alertFactory.error(null, resp.message);
+                    alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){
@@ -150,12 +149,12 @@
                 if(resp.success){
                     globalLoader.hide();
                     _data.orders.orders=resp.data;
-                    // alertFactory.success(null, resp.message);
+                    alertFactory.success(null, "Orders Successfully Found");
                     deffered.resolve(resp.data);
                 }
                 else{
                     globalLoader.hide();
-                    // alertFactory.error(null, resp.message);
+                    alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){
@@ -172,12 +171,12 @@
             restFactory.orders.updateOrder(id, value).then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
-                    // alertFactory.success(null, resp.message);
+                    alertFactory.success(null, resp.message);
                     deffered.resolve(resp.data);
                 }
                 else{
                     globalLoader.hide();
-                    // alertFactory.error(null, resp.message);
+                    alertFactory.error(null, resp.message);
                     deffered.reject(resp);
                 }
             }, function(err){

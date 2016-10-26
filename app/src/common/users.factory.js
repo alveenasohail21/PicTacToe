@@ -10,7 +10,7 @@
             .module('app.auth')
             .factory('UsersFactory', UsersFactory);
 
-        function UsersFactory($q, restFactory){
+        function UsersFactory($q, restFactory, alertFactory){
             /* Return Functions */
 
             var _data={
@@ -53,7 +53,7 @@
                     }
                     else{
                         globalLoader.hide();
-                        // alertFactory.error(null, resp.message);
+                        alertFactory.error(null, resp.message);
                         deffered.reject(resp);
                     }
                 }, function(err){
@@ -76,19 +76,14 @@
                 restFactory.users.userSearch(queryParams).then(function(resp){
                     if(resp.success){
                         globalLoader.hide();
-                        // console.log("before edit: ", _data.users);
-
                         _data.users.users=resp.data.users;
                         _data.users.count=resp.data.count;
-                        // console.log("after edit: ", _data.users);
-
-
-                        // alertFactory.success(null, resp.message);
+                        alertFactory.success(null, "Users Successfully Found");
                         deffered.resolve(resp.data);
                     }
                     else{
                         globalLoader.hide();
-                        // alertFactory.error(null, resp.message);
+                        alertFactory.error(null, resp.message);
                         deffered.reject(resp);
                     }
                 }, function(err){
@@ -105,12 +100,12 @@
                 restFactory.users.updateUser(id, value).then(function(resp){
                     if(resp.success){
                         globalLoader.hide();
-                        // alertFactory.success(null, resp.message);
+                        alertFactory.success(null, resp.message);
                         deffered.resolve(resp.data);
                     }
                     else{
                         globalLoader.hide();
-                        // alertFactory.error(null, resp.message);
+                        alertFactory.error(null, resp.message);
                         deffered.reject(resp);
                     }
                 }, function(err){
@@ -130,12 +125,12 @@
                 restFactory.users.userSearchByTime(queryParams).then(function(resp){
                     if(resp.success){
                         globalLoader.hide();
-                        // alertFactory.success(null, resp.message);
+                        alertFactory.success(null, "Users Successfully Found");
                         _data.users.users=resp.data;
                     }
                     else{
                         globalLoader.hide();
-                        // alertFactory.error(null, resp.message);
+                        alertFactory.error(null, resp.message);
                         deffered.reject(resp);
                     }
                 }, function(err){
