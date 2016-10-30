@@ -50,6 +50,7 @@
             vm.newMedia.theme='Standard';
             MediaFactory.addMedia(vm.newMedia).then(function (response) {
                 vm.newMedia.type='stickers';
+                switchPattern();
                 vm.newMedia.name='';
                 vm.newMedia.theme='Standard';
                 vm.newMedia.media=undefined;

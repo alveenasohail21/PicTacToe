@@ -6,37 +6,48 @@
         <div id="page-content-wrapper">
             <div class="container-fluid orders-details">
                 <h2 text-center>Order Details</h2>
-                <p>Order Id: {{vm.orders.orderId}}</p>
-                <p>Order Date: {{vm.orders.order_data}}</p>
-                <p>Order Total: {{vm.orders.order_total}}</p>
-                <p>Orders Status: {{vm.orders.status}}</p>
-                <p>User Id: {{vm.orders.userId}}</p>
-                <p>Delivery Date From: {{vm.orders.delivery_date_from}}</p>
-                <p>Delivery Date To: {{vm.orders.delivery_date_to}}</p>
+                <p>Order Id: {{vm.orders.orderId || 'NA'}}</p>
+                <p>Order Date: {{vm.orders.order_data || 'NA'}}</p>
+                <p>Order Total: {{vm.orders.order_total || 'NA'}}</p>
+                <p>Orders Status: {{vm.orders.status || 'NA'}}</p>
+                <p>User Id: {{vm.orders.userId || 'NA'}}</p>
+                <p>Delivery Date From: {{vm.orders.delivery_date_from || 'NA'}}</p>
+                <p>Delivery Date To: {{vm.orders.delivery_date_to || 'NA'}}</p>
                 <div class="row">
                     <div class="col col-sm-5">
                         <h3>Billing Details</h3>
-                        <p>Billing: {{vm.orders.billing_active}}</p>
-                        <p>Billing Address: {{vm.orders.billing_address}}</p>
-                        <p>Billing Area Code: {{vm.orders.billing_area_code}}</p>
-                        <p>Billing City: {{vm.orders.billing_city}}</p>
-                        <p>Billing Email: {{vm.orders.billing_email}}</p>
-                        <p>Billing Id: {{vm.orders.billing_id}}</p>
-                        <p>Billing Phone Number: {{vm.orders.billing_phoneNo}}</p>
-                        <p>Billing Postal Code: {{vm.orders.billing_postalcode}}</p>
-                        <p>Billing Username: {{vm.orders.billing_username}}</p>
+                        <p>Billing: {{vm.orders.billing_active || 'NA'}}</p>
+                        <p>Billing Address: {{vm.orders.billing_address || 'NA'}}</p>
+                        <p>Billing Area Code: {{vm.orders.billing_area_code || 'NA'}}</p>
+                        <p>Billing City: {{vm.orders.billing_city || 'NA'}}</p>
+                        <p>Billing Email: {{vm.orders.billing_email || 'NA'}}</p>
+                        <p>Billing Id: {{vm.orders.billing_id || 'NA'}}</p>
+                        <p>Billing Phone Number: {{vm.orders.billing_phoneNo || 'NA'}}</p>
+                        <p>Billing Postal Code: {{vm.orders.billing_postalcode || 'NA'}}</p>
+                        <p>Billing Username: {{vm.orders.billing_username || 'NA'}}</p>
                     </div>
                     <div class="col col-sm-5">
                         <h3>Shipping Details</h3>
-                        <p>Shipping Active: {{vm.orders.shipping_active}}</p>
-                        <p>Shipping Address: {{vm.orders.shipping_address}}</p>
-                        <p>Shipping City: {{vm.orders.shipping_city}}</p>
-                        <p>Shipping First Name: {{vm.orders.shipping_first_name}}</p>
-                        <p>Shipping Id: {{vm.orders.shipping_id}}</p>
-                        <p>Shipping Last Name: {{vm.orders.shipping_last_name}}</p>
-                        <p>Shipping Postal Code: {{vm.orders.shipping_postalcode}}</p>
+                        <p>Shipping Active: {{vm.orders.shipping_active || 'NA'}}</p>
+                        <p>Shipping Address: {{vm.orders.shipping_address || 'NA'}}</p>
+                        <p>Shipping City: {{vm.orders.shipping_city || 'NA'}}</p>
+                        <p>Shipping First Name: {{vm.orders.shipping_first_name || 'NA'}}</p>
+                        <p>Shipping Id: {{vm.orders.shipping_id || 'NA'}}</p>
+                        <p>Shipping Last Name: {{vm.orders.shipping_last_name || 'NA'}}</p>
+                        <p>Shipping Postal Code: {{vm.orders.shipping_postalcode || 'NA'}}</p>
                     </div>
 
+                </div>
+                <h3>Order Items</h3>
+                <div >
+                    <div class="row">
+                        <div class="col col-sm-4" ng-repeat="item in vm.orderItems">
+                            <h4>Item Id: {{item.orderDetail_id || 'NA'}}</h4>
+                            <p>Item Quantity: {{item.orderDetail_quantity || 'NA'}}</p>
+                            <p>Unit Price: {{item.orderDetail_unit_price || 'NA'}}</p>
+                            <p>Status: {{item.orderDetail_status || 'NA'}}</p>
+                        </div>
+                    </div>
                 </div>
 
             </div>

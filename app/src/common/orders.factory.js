@@ -91,11 +91,12 @@
         function getOrderDetails(id){
             globalLoader.show();
             //get all orders
+
             var deffered = $q.defer();
             restFactory.orders.getOrderDetails(id).then(function(resp){
                 if(resp.success){
                     globalLoader.hide();
-                    // alertFactory.success(null, resp.message);
+                    console.log(resp.data);
                     deffered.resolve(resp.data);
                 }
                 else{

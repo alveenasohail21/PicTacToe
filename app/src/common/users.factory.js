@@ -47,6 +47,7 @@
                 restFactory.users.getAllusers(queryParams).then(function(resp){
                     if(resp.success){
                         globalLoader.hide();
+                        console.log(resp.data);
                         _data.users=resp.data;
                         // alertFactory.success(null, resp.message);
                         deffered.resolve(resp.data);
