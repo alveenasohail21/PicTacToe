@@ -33,7 +33,7 @@
               alertFactory.success(null,resp.data.message);
               $timeout(function(){
                 globalLoader.hide();
-                $state.go('Dashboard');
+                $state.go('Dashboard.Analytics');
               },1500);
             }
             else{

@@ -39,7 +39,7 @@
             Upload.upload({
                 url : 'http://localhost:8000/admin/media',
                 headers: {
-                    token :   'Bearer' + '{"'+$localStorage["token"]+'"}'
+                    token :   'Bearer ' + '{"'+$localStorage["token"]+'"}'
                 },
                 data :  media
             }).then(function(resp){
