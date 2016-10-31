@@ -19,27 +19,11 @@
         $stateProvider
             .state('Dashboard', {
                     url:'/dashboard',
-                    resolve: {
-                        r_earningByCity: function (AnalyticsFactory) {
-                            return AnalyticsFactory.earningByCity();
-                        },
-                        r_annualEarning: function (AnalyticsFactory) {
-                            return AnalyticsFactory.annualEarning();
-                        },
-                        r_adminToday: function (AnalyticsFactory) {
-                            return AnalyticsFactory.adminToday();
-                        }
-                    },
-                    views: {
-                        '@':{
-                            templateUrl:'src/dashboard/dashboard.html',
-                            controller: 'AnalyticsCtrl as vm'
-                        }
-                    }
+                    abstract : true
                 }
             )
             .state('Dashboard.Analytics', {
-                    url:'/analytics',
+                    url:'/home',
                     resolve: {
                         r_earningByCity: function (AnalyticsFactory) {
                             return AnalyticsFactory.earningByCity();
