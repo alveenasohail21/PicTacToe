@@ -58,7 +58,9 @@
         }
 
         function deleteMedia(id, type) {
-            MediaFactory.deleteMedia(id, type || 'none');
+            MediaFactory.deleteMedia(id, type || 'none').then(function (response) {
+                init();
+            });
         }
 
         function getPages(from, type) {

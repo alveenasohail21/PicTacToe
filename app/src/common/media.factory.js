@@ -10,7 +10,7 @@
         .module('app.auth')
         .factory('MediaFactory', MediaFactory);
 
-    function MediaFactory($q, restFactory, Upload, $localStorage, alertFactory){
+    function MediaFactory($q, restFactory, Upload, $localStorage, alertFactory, API_URL){
         /* Return Functions */
 
         const DefaultQueryParams = {
@@ -37,9 +37,11 @@
             var deffered = $q.defer();
 
             Upload.upload({
-                url : 'http://localhost:8000/admin/media',
+                url : API_URL+'/admin/media',
+                method: 'POST',
                 headers: {
-                    token :   'Bearer ' + '{"'+$localStorage["token"]+'"}'
+                    'Content-Type': 'application/json',
+                    'token': 'Bearer {' + $localStorage.token + '}'
                 },
                 data :  media
             }).then(function(resp){
@@ -116,8 +118,10 @@
         function findIndexById(id, dataArray){
             var foundIndex = null;
             dataArray.forEach(function(value, index){
-                if(dataArray._id === id){
+                console.log("index: ",dataArray[index].id, id);
+                if(dataArray[index]._id === id){
                     foundIndex = index;
+
                 }
             });
             return foundIndex;
