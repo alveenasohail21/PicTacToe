@@ -118,10 +118,8 @@
         function findIndexById(id, dataArray){
             var foundIndex = null;
             dataArray.forEach(function(value, index){
-                console.log("index: ",dataArray[index].id, id);
                 if(dataArray[index]._id === id){
                     foundIndex = index;
-
                 }
             });
             return foundIndex;
