@@ -886,8 +886,10 @@
     }
 
     function loadBkgImage(image, propsToAdd, cb){
-      // console.log('DESIGN TOOL: loadBkgImage', image);
+      globalLoader.show();
+      console.log('DESIGN TOOL: loadBkgImage', image);
       var img = new Image();
+      img.crossOrigin = 'Anonymous';
       img.onload = function(){
         // image settings
         var fabricImage;
@@ -921,21 +923,21 @@
           fabricCanvas.backgroundColor = '#cccccc';
           // add to canvas
           fabricCanvas.add(fabricImage);
-          // position
-          fabricImage.center();
-          // scale
-          if(img.naturalWidth > img.naturalHeight){
-            fabricImage.scaleToHeight(fabricCanvas.getHeight());
-          }
-          else{
-            fabricImage.scaleToWidth(fabricCanvas.getWidth());
-          }
           // save fabric image instance
           sectionBkgImages = [];
           sectionBkgImages.push(fabricImage);
           var canvasType = getCanvasTypeBasedOnOrientation(fabricImage);
           // change the canvas back to default on new single image load
-          updateImageEditorForCanvasChange(canvasType);
+          // updateImageEditorForCanvasChange(canvasType);
+
+          // Admin - resize canvas to full
+          updateImageEditorSizeAccordingToLoadedData(image);
+          // Admin -
+          updateScalingOfBkgImage();
+          // position
+          fabricImage.center();
+          // backgroundImageBoundaryCheck(sectionBkgImages[0]);
+
         }
         /* Working With Layouts Sections */
         else{
@@ -991,14 +993,21 @@
         fabricCanvas.deactivateAll();
         // update flag
         flags.isCanvasEmpty = false;
+        // Admin -
+        $timeout(function(){
+          // render
+          fabricCanvas.renderAll();
+          fabricCanvas.deactivateAll();
+          downloadCanvas();
+          globalLoader.hide();
+        }, 2000);
         // call callback
         if(cb){
           cb(img);
         }
       };
-      // img.src = image.base64;
       // get high res
-      img.src = image.highResBase64
+      img.src = getOriginalImageSrc(image, true);
     }
 
     function loadFromJSON(canvasJSON,index, cb){
@@ -2729,8 +2738,11 @@
      * Admin Panel Helper Functions
      * */
 
-    function getOriginalImageSrc(obj){
+    function getOriginalImageSrc(obj, isPhoto){
       var defaultOriginalSize = "original";
+      if(isPhoto){
+        return safeUrlConvert(obj.url) + '-' + defaultOriginalSize + '.' + obj.extension;
+      }
       return safeUrlConvert(obj.photoData.url) + '-' + defaultOriginalSize + '.' + obj.photoData.extension;
     }
 
