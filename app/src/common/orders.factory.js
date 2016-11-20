@@ -35,7 +35,8 @@
             getOrdersStatus: getOrdersStatus,
             orderSearchByTime: orderSearchByTime,
             orderSearch: orderSearch,
-            updateOrder: updateOrder
+            updateOrder: updateOrder,
+          getItemDetails: getItemDetails
         };
         /* Define Fuctions */
 
@@ -186,5 +187,29 @@
             });
             return deffered.promise;
         }
+
+      function getItemDetails(orderId, itemId){
+        globalLoader.show();
+        //get all orders
+        var deffered = $q.defer();
+        restFactory.orders.getItemDetails(orderId, itemId)
+          .then(function(resp){
+          if(resp.success){
+            globalLoader.hide();
+            // alertFactory.success(null, resp.message);
+            deffered.resolve(resp.data);
+          }
+          else{
+            globalLoader.hide();
+            alertFactory.error(null, resp.message);
+            deffered.reject(resp);
+          }
+        }, function(err){
+          globalLoader.hide();
+            alertFactory.error(null, err.data.message);
+            deffered.reject(err);
+        });
+        return deffered.promise;
+      }
     }
 }());

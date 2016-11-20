@@ -6,19 +6,77 @@
 
 (function(){
 
-    'use strict';
+  'use strict';
 
-    angular
-        .module('app.dashboard')
-        .controller('orderDetailsCtrl', orderDetailsCtrl);
+  angular
+    .module('app.dashboard')
+    .controller('orderDetailsCtrl', orderDetailsCtrl);
 
-    /* @ngInject */
-    function orderDetailsCtrl(OrdersFactory, $stateParams, r_details){
-        var vm = this;
-        vm.orderItems=r_details.orderDetails;
-        vm.orders=r_details.orders[0];
-        console.log("id: ", vm.orders);
-        console.log("id: ", vm.orderItems);
+  /* @ngInject */
+  function orderDetailsCtrl(r_details, OrdersFactory, alertFactory, designTool){
+    var vm = this;
+
+    vm.orderItems=r_details.orderDetails;
+    vm.orders=r_details.orders[0];
+
+    vm.getItemDetails = getItemDetails;
+
+    // fabric canvas
+    designTool.initializeTool('canvas');
+
+    console.log("id: ", vm.orders);
+    console.log("id: ", vm.orderItems);
+
+    function init(){
+      $(document).ready(function(){
+
+        designTool.onDOMLoad();
+        // initialize zoom slider
+        designTool.initializeZoomSlider("#ex4");
+        // update image studio .element css
+        designTool.updateImageEditorSize();
+      });
     }
+
+    function getItemDetails(itemId){
+      var orderId = vm.orders.orderId;
+
+      OrdersFactory.getItemDetails(orderId, itemId)
+        .then(function(resp){
+
+          alertFactory.success('Please wait!', 'High resolution product is generating...');
+
+          resp = updateItemSizeDetails(resp);
+          
+          designTool.resetTool();
+          
+          if(resp.canvasJSON){
+            console.log('loading canvasJSON');
+            designTool.loadFromJSON(resp.canvasJSON, null, function(loadedImage){
+              // TODO: if require any thing
+            })
+          }
+          else{
+            console.log('loading normal image');
+            designTool.loadBkgImage(resp, {currentFilter: 'normal'}, function(loadedImage){
+
+            });
+          }
+
+          console.log('in ctrl', resp);
+        })
+
+    }
+
+    function updateItemSizeDetails(item){
+      item.canvasSizeDetails = designTool.findItemSizeDetails(item);
+      // convert url as well
+      // items.url = convertUrl(items[i]);
+      return item;
+    }
+
+    init();
+
+  }
 
 }());

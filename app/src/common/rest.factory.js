@@ -35,7 +35,8 @@
         getOrderDetails: getOrderDetails,
         orderSearch: orderSearch,
         orderSearchByTime: orderSearchByTime,
-        updateOrder:updateOrder
+        updateOrder:updateOrder,
+        getItemDetails: getItemDetails
       },
       analytics: {
         annualEarning: annualEarning,
@@ -45,6 +46,7 @@
       media:{
         addMedia:addMedia,
         getMedia:getMedia,
+        get: getMedia,
         deleteMedia:deleteMedia
       },
       oneUrl: oneUrl
@@ -84,6 +86,11 @@
       return Admin.one('orders').one(id).customPUT({status: value});
     }
 
+    function getItemDetails(orderId, itemId){
+      console.log(orderId, itemId);
+      return Admin.one('orders').one(orderId.toString()).one('items').one(itemId.toString()).get();
+    }
+
     function userSearchByTime(queryParams){
       return Admin.one('searchbytime').one('users').post(null, queryParams);
     }
@@ -115,5 +122,6 @@
     function deleteMedia(id){
       return Admin.one('media').one(id).remove();
     }
+    
   }
 }());

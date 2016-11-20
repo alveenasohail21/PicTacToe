@@ -1,10 +1,33 @@
 <div class="sidebar">
     <div id="wrapper">
         <ng-include ng-if="user" src="'src/layouts/sidebar.html'"></ng-include>
+
+        <ptt-texts></ptt-texts>
+
         <!-- /#page-content-wrapper -->
 
         <div id="page-content-wrapper">
             <div class="container-fluid orders-details ">
+
+              <!-- Image Studio : Start -->
+              <div id="image-studio" style="position: fixed; top: 0; left: 0;">
+
+                <div class="element">
+
+                  <div class="editor">
+                    <!-- Canvas -->
+                    <canvas id="canvas"></canvas>
+                    <!-- Hidden Image For Filter -->
+                  </div>
+
+                  <!--<div class="zoomBar">-->
+                    <!--<input id="ex4" type="text" data-slider-min="1" data-slider-max="5" data-slider-value="0" data-slider-step="0.05" data-slider-orientation="vertical"/>-->
+                  <!--</div>-->
+
+                </div>
+
+              </div>
+              <!-- Image Studio : End -->
 
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -145,7 +168,7 @@
                                 <p>Item Quantity: {{item.orderDetail_quantity || 'NA'}}</p>
                                 <p>Unit Price: {{item.orderDetail_unit_price || 'NA'}}</p>
                                 <p>Status: {{item.orderDetail_status || 'NA'}}</p>
-                                <button class="btn btn-info">Download</button>
+                                <button class="btn btn-info" ng-click="vm.getItemDetails(item.orderDetail_id)">Download</button>
                             </div>
                         </div>
                     </div>
