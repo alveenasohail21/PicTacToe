@@ -1359,7 +1359,7 @@
           if(stickersArray){
             bringAllStickersToFront(stickersArray);
             $timeout(function(){
-              // downloadCanvas();
+              downloadCanvas();
               globalLoader.hide();
               if(cb){
                 cb(callbackArgToPass);
@@ -1372,7 +1372,7 @@
           // fabricCanvas.renderAll();
           // Admin -
           $timeout(function(){
-            // downloadCanvas();
+            downloadCanvas();
             globalLoader.hide();
             if(cb){
               cb(callbackArgToPass);
