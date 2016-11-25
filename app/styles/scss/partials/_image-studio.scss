@@ -1,5 +1,5 @@
 /* Image Studio */
-#caman-canvas{
+.caman-canvas{
   position: fixed;
   top: 0;
   left: 0;
@@ -8,10 +8,10 @@
 div#image-studio{
   height: 100%;
   width: 100%;
-  visibility: hidden;
+  //visibility: hidden;
   //position: relative;
   //padding: 2.65% 0;
-  //overflow: scroll;
+  overflow: scroll;
   //z-index: 1000;
   border: 3px solid blue;
   div.toolbar{

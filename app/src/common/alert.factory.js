@@ -28,7 +28,8 @@
     return {
       success: success,
       error: error,
-      warning: warning
+      warning: warning,
+      removeAlert: removeAlert
     };
 
 

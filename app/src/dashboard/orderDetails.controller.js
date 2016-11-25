@@ -20,6 +20,7 @@
     vm.orders=r_details.orders[0];
 
     vm.getItemDetails = getItemDetails;
+    vm.downloadItem = downloadItem;
 
     // fabric canvas
     designTool.initializeTool('canvas');
@@ -44,7 +45,7 @@
       OrdersFactory.getItemDetails(orderId, itemId)
         .then(function(resp){
 
-          alertFactory.success('Please wait!', 'High resolution product is generating...');
+          alertFactory.success('Please wait!', 'High resolution product is generating...', true);
 
           resp = updateItemSizeDetails(resp);
           
@@ -54,18 +55,25 @@
             console.log('loading canvasJSON');
             designTool.loadFromJSON(resp.canvasJSON, null, function(loadedImage){
               // TODO: if require any thing
+              console.log("removing alert 1");
+              alertFactory.removeAlert(0, true);
             })
           }
           else{
             console.log('loading normal image');
             designTool.loadBkgImage(resp, {currentFilter: 'normal'}, function(loadedImage){
-
+              console.log("removing alert 2");
+              alertFactory.removeAlert(0, true);
             });
           }
 
           console.log('in ctrl', resp);
         })
 
+    }
+
+    function downloadItem(){
+      designTool.downloadCanvas(false);
     }
 
     function updateItemSizeDetails(item){

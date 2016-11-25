@@ -561,7 +561,9 @@
       checkResolution: checkResolution,
       //drag and drop events
       // others
-      findItemSizeDetails: findItemSizeDetails
+      findItemSizeDetails: findItemSizeDetails,
+      // download
+      downloadCanvas: downloadCanvas
     };
 
     /* Define Functions */
@@ -796,6 +798,8 @@
     }
 
     function updateScalingOfSectionImage(sectionIndex){
+      console.log("sectionIndex: ", sectionIndex);
+      console.log("currentLayoutSections: ", currentLayoutSections);
       // save image orientation, default to vertical image
       var isHorizontal = false;
       // save current section index and object
@@ -831,7 +835,7 @@
         }
       }
       // select the section again to apply blue border
-      selectLayoutSection(currSelectedSection);
+      // selectLayoutSection(currSelectedSection);
     }
 
     function setDimensions(dimension){
@@ -998,13 +1002,14 @@
           // render
           fabricCanvas.renderAll();
           fabricCanvas.deactivateAll();
-          downloadCanvas();
+          downloadCanvas(true);
           globalLoader.hide();
+          // call callback
+          if(cb){
+            cb(img);
+          }
         }, 2000);
-        // call callback
-        if(cb){
-          cb(img);
-        }
+
       };
       // get high res
       img.src = getOriginalImageSrc(image, true);
@@ -1053,7 +1058,14 @@
               break
           }
         }
+
+        // Admin -
+        calculateSizeScaleFactor(canvasJSON.customSettings);
+        // Admin - resize canvas to full
+        updateImageEditorSizeAccordingToLoadedData(canvasJSON.customSettings);
+
         var textArray = [];
+        var stickersArray = [];
         for(var prop in canvasJsonObjects){
           if(canvasJsonObjects.hasOwnProperty(prop)){
             switch (prop){
@@ -1061,21 +1073,48 @@
                 for(var k = 0; k<canvasJsonObjects[prop].length;k++){
                   (function(layoutSection){
                     var clipRect = new fabric.Rect(layoutSection);
+
+                    // Admin -
+                    updateObjectPosition(clipRect);
+                    // Admin -
+                    updateObjectSize(clipRect);
+
+                    // clipRect.fill = 'rgba(0,255,255,1)'; /* use transparent for no fill */
+
+                    // set coords
+                    clipRect.setCoords();
+
                     currentLayoutSections[clipRect.sectionIndex] = clipRect;
                     fabricCanvas.add(clipRect);
+                    // set coords
+                    // clipRect.setCoords();
+
+                    console.log('clipRect : ', clipRect);
+
                     loadedObjs++;
                     if(loadedObjs == canvasJSON.objects.length){
-                      continueRender(null,textArray);
+                      continueRender(null,textArray, stickersArray);
                     }
                   }(canvasJsonObjects[prop][k]));
                 }
                 break;
               case customObjectTypes.backgroundImage:
                 for(var b  = 0;b<canvasJsonObjects[prop].length;b++){
+                  console.log("BGKIMG: ",canvasJsonObjects[prop][b]);
                   (function(bkgImage){
-                    var img = new Image();
-                    img.onload = function(){
-                      var fabricImage = new fabric.Image(img, bkgImage);
+
+                    bkgImage.crossOrigin = 'anonymous';
+
+                    getOriginalImageElement(bkgImage, function(imgElement, bkgObj){
+
+                      var fabricImage = new fabric.Image(imgElement, bkgImage);
+
+                      fabricImage.set({
+                        originalWidth: $(imgElement)[0].naturalWidth,
+                        originalHeight: $(imgElement)[0].naturalHeight,
+                        width: $(imgElement)[0].naturalWidth,
+                        height: $(imgElement)[0].naturalHeight
+                      });
                       // if bkg image (avoiding plus signs)
                       if(fabricImage.customObjectType == customObjectTypes.backgroundImage){
                         // apply clipping
@@ -1094,13 +1133,59 @@
                         sectionBkgImages[fabricImage.sectionIndex] = fabricImage;
                         // add to canvas
                         fabricCanvas.add(fabricImage);
-                        loadedObjs++;
-                        if(loadedObjs == canvasJSON.objects.length){
-                          continueRender(null,textArray);
-                        }
+                        //
+                        updateScalingOfSectionImage(fabricImage.sectionIndex);
+                        // Admin -
+                        updateObjectPosition(fabricImage);
+
+                        applyFilter(fabricImage, 0, function(isApplied, imgObj){
+                          fabricImage = imgObj;
+                          fabricImage.originalState.top = fabricImage.top;
+                          fabricImage.originalState.left = fabricImage.left;
+                          fabricImage.originalState.scaleX = fabricImage.scaleX;
+                          fabricImage.originalState.scaleY = fabricImage.scaleY;
+                          fabricImage.setCoords();
+                          // fabricImage.clipTo = function(ctx) {
+                          //   return _.bind(clipByName, fabricImage)(ctx);
+                          // };
+                          console.log("FabricImage After Filter: ", fabricImage);
+                          loadedObjs++;
+                          if(loadedObjs == canvasJSON.objects.length){
+                            continueRender(null,textArray, stickersArray);
+                          }
+                        })
                       }
-                    };
-                    img.src = bkgImage.src;
+                    });
+
+                    // var img = new Image();
+                    // img.onload = function(){
+                    //   var fabricImage = new fabric.Image(img, bkgImage);
+                    //   // if bkg image (avoiding plus signs)
+                    //   if(fabricImage.customObjectType == customObjectTypes.backgroundImage){
+                    //     // apply clipping
+                    //     fabricImage.clipTo = function(ctx) {
+                    //       return _.bind(clipByName, fabricImage)(ctx);
+                    //     };
+                    //     // fabric default settings
+                    //     fabricImage.set(fabricObjSettings);
+                    //     // other settings from prev objects
+                    //     fabricImage.set({
+                    //       zoom: bkgImage.zoom
+                    //     });
+                    //     // set coords
+                    //     fabricImage.setCoords();
+                    //     // save fabric image instance to section index
+                    //     sectionBkgImages[fabricImage.sectionIndex] = fabricImage;
+                    //     // add to canvas
+                    //     fabricCanvas.add(fabricImage);
+                    //     loadedObjs++;
+                    //     if(loadedObjs == canvasJSON.objects.length){
+                    //       continueRender(null,textArray);
+                    //     }
+                    //   }
+                    // };
+                    // img.src = bkgImage.src;
+
                   }(canvasJsonObjects[prop][b]));
                 }
                 break;
@@ -1108,13 +1193,14 @@
                 for(var a=0;a<canvasJsonObjects[prop].length;a++){
                   (function(plusSignImage){
                     var img = new Image();
+                    img.crossOrigin = 'Anonymous';
                     img.src = plusSignImage.src;
                     var fabricImage = new fabric.Image(img, plusSignImage);
                     // add to canvas
                     fabricCanvas.add(fabricImage);
                     loadedObjs++;
                     if(loadedObjs == canvasJSON.objects.length){
-                      continueRender(null,textArray);
+                      continueRender(null,textArray, stickersArray);
                     }
                   }(canvasJsonObjects[prop][a]));
                 }
@@ -1123,19 +1209,25 @@
                 for(var s=0; s<canvasJsonObjects[prop].length; s++){
                   (function(sticker){
                     var img = new Image();
+                    img.crossOrigin = 'Anonymous';
                     img.onload = function(){
                       var fabricStickerImg = new fabric.Image(img, sticker);
                       // fabric default settings
                       fabricStickerImg.set(fabricObjSettings);
+                      // Admin -
+                      updateObjectSize(fabricStickerImg);
+                      // Admin -
+                      updateObjectPosition(fabricStickerImg);
                       // set coords
                       fabricStickerImg.setCoords();
                       // add to canvas
                       fabricCanvas.add(fabricStickerImg);
+                      stickersArray.push(fabricStickerImg);
                       // bring forward
                       fabricCanvas.bringForward(fabricStickerImg);
                       loadedObjs++;
                       if(loadedObjs == canvasJSON.objects.length){
-                        continueRender(null,textArray);
+                        continueRender(null,textArray, stickersArray);
                       }
                     };
                     img.src = sticker.src;
@@ -1148,6 +1240,10 @@
                     var fabricText = new fabric.IText('Add Heading', text);
                     // fabric default settings
                     fabricText.set(fabricObjSettings);
+                    // Admin -
+                    updateTextFontSize(fabricText);
+                    // Admin -
+                    updateObjectPosition(fabricText);
                     // set coords
                     fabricText.setCoords();
                     // add to canvas
@@ -1157,7 +1253,7 @@
                     fabricCanvas.bringForward(fabricText);
                     loadedObjs++;
                     if(loadedObjs == canvasJSON.objects.length){
-                      continueRender(null,textArray);
+                      continueRender(null,textArray, stickersArray);
                     }
                   }(canvasJsonObjects[prop][t]));
                 }
@@ -1216,14 +1312,15 @@
                         updateScalingOfBkgImage();
                         // Admin -
                         updateObjectPosition(bkgObj);
-                        applyFilter(bkgObj.currentFilter, 0, function(){
+                        applyFilter(bkgObj, 0, function(){
                           // Admin -
                           $timeout(function(){
                             // render
                             fabricCanvas.renderAll();
                             fabricCanvas.deactivateAll();
-                            downloadCanvas();
+                            downloadCanvas(true);
                             globalLoader.hide();
+                            continueRender();
                           }, 2000);
                         });
                       });
@@ -1250,15 +1347,38 @@
                   break;
               }
             }
-            continueRender();
           });
         });
       }
 
-      function continueRender(callbackArgToPass,textArray){
+      function continueRender(callbackArgToPass, textArray, stickersArray){
         // since in layouts backgroumd images take more time on loading and the text is load first which remain in back.
         if(textArray){
           bringAllTextToFront(textArray);
+
+          if(stickersArray){
+            bringAllStickersToFront(stickersArray);
+            $timeout(function(){
+              // downloadCanvas();
+              globalLoader.hide();
+              if(cb){
+                cb(callbackArgToPass);
+              }
+            }, 5000);
+          }
+          else{
+          // render
+          // fabricCanvas.deactivateAll();
+          // fabricCanvas.renderAll();
+          // Admin -
+          $timeout(function(){
+            // downloadCanvas();
+            globalLoader.hide();
+            if(cb){
+              cb(callbackArgToPass);
+            }
+          }, 5000);
+        }
         }
         // render
         fabricCanvas.renderAll();
@@ -1266,8 +1386,10 @@
         // update flag
         flags.isCanvasEmpty = false;
         // call callback
-        if(cb){
-          cb(callbackArgToPass);
+        if(!textArray){
+          if(cb){
+            cb(callbackArgToPass);
+          }
         }
       }
     }
@@ -1565,10 +1687,11 @@
 
     // ****************************************** Left sidemenu methods ******************************************
 
-    function applyFilter(filter,index, cb){
+    function applyFilter(bkgImgObj, index, cb){
+      var filter = bkgImgObj.currentFilter;
       console.log('DESIGN TOOL: applyFilter', filter);
       // apply filter
-      Caman('#caman-canvas', function () {
+      Caman('#caman-canvas-'+bkgImgObj.photoData._id, function () {
         //var that = this;
         this.revert(false);
         switch(filter){
@@ -1588,7 +1711,7 @@
             var imgObj;
             if(flags.isLayoutApplied){
               imgObj = findByProps({
-                sectionIndex: selectedSectionIndex,
+                sectionIndex: bkgImgObj.sectionIndex,
                 customObjectType: customObjectTypes.backgroundImage
               })
             }
@@ -1609,10 +1732,12 @@
             imgObj.set('currentFilter', filter);
             // update zoom
             // resetZoomSettings();
-            cb(true);
             fabricCanvas.renderAll();
             // firing edited image event
             customEvents.fire(customEventsList.imageEdited,index);
+
+            cb(true, imgObj);
+
           };
           img.src = this.toBase64();
         });
@@ -2544,7 +2669,6 @@
       this.setCoords();
       var clipRect = findByClipName(this.clipName);
       // console.log(this);
-      // console.log(clipRect);
       var scaleXTo1 = (1 / this.scaleX);
       var scaleYTo1 = (1 / this.scaleY);
       ctx.save();
@@ -2670,6 +2794,17 @@
       }
     }
 
+    function bringAllStickersToFront(stickersArray) {
+      if(stickersArray.length === 0 || !stickersArray){
+        return;
+      }
+      else {
+        for(var i = 0; i< stickersArray.length; i++){
+          fabricCanvas.bringToFront(stickersArray[i]);
+        }
+      }
+    }
+
     function checkResolution(selectedImage){
       if(!selectedImage) return;
       if(!flags.isLayoutApplied){
@@ -2746,17 +2881,20 @@
       return safeUrlConvert(obj.photoData.url) + '-' + defaultOriginalSize + '.' + obj.photoData.extension;
     }
 
-    function getOriginalImageElement(obj, cb){
+    function getOriginalImageElement(obj, cb, dontRemovePreviousCamanImgs){
       var defaultOriginalSize = "original";
       var src = safeUrlConvert(obj.photoData.url) + '-' + defaultOriginalSize + '.' + obj.photoData.extension;
 
       // remove previous caman img for new filter
-      $('#caman-canvas').remove();
+      if(!dontRemovePreviousCamanImgs){
+        $('.caman-canvas').remove();
+      }
 
       // update img for canvas
       var img = new Image();
       img.crossOrigin = 'Anonymous';
-      img.id = 'caman-canvas';
+      img.id = 'caman-canvas-'+obj.photoData._id;
+      img.className = 'caman-canvas';
       img.onload = function() {
         $('body').append(img);
         if(cb){
@@ -2767,16 +2905,39 @@
       img.src = src;
     }
 
-    function downloadCanvas(){
+    function downloadCanvas(applyOptions){
       var anchor = {};
-      anchor.href = fabricCanvas.toDataURL({
-        format: 'jpeg',
-        quality: 1,
-        multiplier: 0.8,
-        width: fabricCanvas.getWidth(),
-        height: fabricCanvas.getHeight()
-      });
+
+      if(applyOptions){
+        anchor.href = fabricCanvas.toDataURL({
+          format: 'png',
+          quality: 1,
+          multiplier: 0.8,
+          width: fabricCanvas.getWidth(),
+          height: fabricCanvas.getHeight()
+        });
+      }
+      else{
+        anchor.href = fabricCanvas.toDataURL({
+          format: 'png',
+          quality: 1,
+          // multiplier: 0.8
+          width: fabricCanvas.getWidth(),
+          height: fabricCanvas.getHeight()
+        });
+        // TODO: resize to original size
+      }
+
       anchor.download = 'canvas.png';
+
+      // var img = new Image();
+      //
+      // img.onload = function(){
+      //   $('body').append(img);
+      // };
+      //
+      // img.src = anchor.href;
+
       window.open(anchor.href);
     }
 
